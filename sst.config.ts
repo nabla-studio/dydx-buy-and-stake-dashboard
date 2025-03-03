@@ -11,6 +11,19 @@ export default $config({
     };
   },
   async run() {
-    new sst.aws.Nextjs("MyWeb");
+    new sst.aws.StaticSite("Dashboard", {
+      // Define building commands
+      build: {
+        command: "npm run build",
+        output: "dist"
+      },
+      // Avoid to wait for the CloudFront distribution to be deployed before 
+      // completing the deployment of the app
+      transform: {
+        cdn: {
+          wait: false
+        }
+      }
+    });
   },
 });
