@@ -1,6 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="./.sst/platform/config.d.ts" />
 
+// Extract environment variables
+const { DOMAIN_NAME, DOMAIN_CERT_ARN } = process.env;
+
 export default $config({
   app(input) {
     return {
@@ -17,11 +20,22 @@ export default $config({
         command: "npm run build",
         output: "dist"
       },
-      // Avoid to wait for the CloudFront distribution to be deployed before 
-      // completing the deployment of the app
       transform: {
         cdn: {
-          wait: false
+          // Avoid to wait for the CloudFront distribution to be deployed before 
+          // completing the deployment of the app
+          wait: false,
+          
+          comment: `${$app.stage} dydx dashboard site`,
+          
+          // Add custom domain only if provided
+          ...(DOMAIN_NAME && DOMAIN_CERT_ARN && {
+            domain: {
+              name: DOMAIN_NAME,
+              dns: false,
+              cert: DOMAIN_CERT_ARN
+            },
+          })
         }
       }
     });

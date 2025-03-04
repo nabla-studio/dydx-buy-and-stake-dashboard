@@ -43,16 +43,19 @@ jobs:
       - name: deps
         run: bun install
       
-      # 5. Configure AWS credentials for the various environment
+      # 5. Configure AWS credentials for the prod environment
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets[format('{0}_ROLE_ARN', github.ref_name)] }}
+          role-to-assume: ${{ secrets.PROD_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       # 6. Deploy the application:
-      #    Executes the command "bun sst deploy", passing the stage based on the branch name.
+      #    Executes the command "bun sst deploy" over the prod stage.
       - name: Deploy
-        
+        env:
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          DOMAIN_CERT_ARN: ${{ secrets.DOMAIN_CERT_ARN }}
+
         run: |
-          bunx sst deploy --stage=${{ github.ref_name }}
+          bunx sst deploy --stage=prod
