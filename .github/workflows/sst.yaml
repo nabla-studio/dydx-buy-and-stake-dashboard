@@ -1,0 +1,61 @@
+# Workflow name: "sst deploy"
+name: sst deploy
+
+# Trigger configuration:
+# - push: automatically triggers the workflow when a push is made to the "prod" branch.
+on:
+  push:
+    branches:
+      - prod
+
+# Concurrency configuration: prevents multiple simultaneous executions on the same branch.
+# The concurrency group is defined by the GitHub reference (branch or tag) that triggered the workflow.
+concurrency: 
+  group: ${{ github.ref }}
+
+jobs:
+  deploy:
+    # This job runs on the latest Ubuntu virtual machine.
+    runs-on: ubuntu-latest
+
+    # Define the permissions needed for the job:
+    # - id-token: write is used for authentication tasks (e.g., AWS OIDC).
+    # - contents: read allows read-only access to the repository contents.
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      # 1. Check out the repository: retrieves the source code from the repository.
+      - uses: actions/checkout@v4
+
+      # 2. Setup Bun: installs the latest version of Bun.
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      # 3. Setup Node.js: installs Node.js version 20.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+        
+      # 4. Install dependencies: uses Bun to install all project dependencies.
+      - name: deps
+        run: bun install
+      
+      # 5. Configure AWS credentials for the prod environment
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.PROD_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 6. Deploy the application:
+      #    Executes the command "bun sst deploy" over the prod stage.
+      - name: Deploy
+        env:
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          DOMAIN_CERT_ARN: ${{ secrets.DOMAIN_CERT_ARN }}
+
+        run: |
+          bunx sst deploy --stage=prod
