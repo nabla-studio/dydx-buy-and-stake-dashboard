@@ -1,7 +1,15 @@
+import { CirculatingSupplySection } from "@/components/circulating-supply-section";
+
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      Home
-    </div>
+    <section>
+      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-10">
+        Dashboard
+      </h1>
+
+      <div className="grid md:grid-cols-3">
+        <CirculatingSupplySection className="md:col-span-full" />
+      </div>
+    </section>
   );
 }
