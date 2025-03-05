@@ -30,7 +30,7 @@ export default function RootLayout({
       >
         <Navbar />
         <main className="px-5 xl:px-10 2xl:container">{children}</main>
-        <footer className="px-5 xl:px-10 2xl:container py-5">Footer</footer>
+        <footer className="px-5 xl:px-10 2xl:container py-5" />
       </body>
     </html>
   );
