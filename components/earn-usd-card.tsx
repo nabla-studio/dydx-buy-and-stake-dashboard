@@ -18,7 +18,7 @@ const Footer = () => {
 export function EarnUsdCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
-      title="Staked"
+      title="Earned"
       description="It refers to the number of tokens that are purchased by dYdX foundation."
       footer={<Footer />}
       {...rest}

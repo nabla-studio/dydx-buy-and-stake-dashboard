@@ -1,10 +1,10 @@
 import { CirculatingSupplySection } from "@/components/circulating-supply-section";
-import { EarnUsdCard } from "@/components/earn-chart-card";
+import { EarnUsdCard } from "@/components/earn-usd-card";
 import { PurchasedBalanceCard } from "@/components/purchased-balance-card";
 import { PurchasedChartCard } from "@/components/purchased-chart-card";
 import { PurchasedUsdCard } from "@/components/purchased-usd-card";
 import { StakedChartCard } from "@/components/staked-chart-card";
-import { StakedPieChartCard } from "@/components/staked-pie-chart-card";
+import { StakedRadialChartCard } from "@/components/staked-radial-chart-card";
 import { TransactionsTable } from "@/components/transactions-table";
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
         <PurchasedBalanceCard />
 
         <StakedChartCard />
-        <StakedPieChartCard />
+        <StakedRadialChartCard />
         <EarnUsdCard />
 
         <TransactionsTable />
