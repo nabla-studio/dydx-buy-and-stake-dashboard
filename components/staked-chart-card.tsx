@@ -11,18 +11,19 @@ import {
 } from "./ui/chart";
 
 const chartData = [
-  { date: "2024-04-01", desktop: 222, mobile: 150 },
-  { date: "2024-04-02", desktop: 97, mobile: 180 },
-  { date: "2024-04-03", desktop: 167, mobile: 120 },
-  { date: "2024-04-10", desktop: 261, mobile: 190 },
-  { date: "2024-04-11", desktop: 327, mobile: 350 },
-  { date: "2024-04-12", desktop: 292, mobile: 210 },
-  { date: "2024-04-13", desktop: 342, mobile: 380 },
-  { date: "2024-04-14", desktop: 137, mobile: 220 },
-  { date: "2024-04-15", desktop: 120, mobile: 170 },
-  { date: "2024-04-16", desktop: 138, mobile: 190 },
-  { date: "2024-04-17", desktop: 446, mobile: 360 },
-  { date: "2024-04-18", desktop: 364, mobile: 410 },
+  { date: new Date("2024-04-01").getTime(), desktop: 222, mobile: 150 },
+  { date: new Date("2024-04-02").getTime(), desktop: 97, mobile: 180 },
+  { date: new Date("2024-04-03").getTime(), desktop: 167, mobile: 120 },
+  { date: new Date("2024-04-04").getTime(), desktop: 167, mobile: 120 },
+  { date: new Date("2024-04-05").getTime(), desktop: 167, mobile: 120 },
+  { date: new Date("2024-04-06").getTime(), desktop: 167, mobile: 120 },
+  { date: new Date("2024-04-07").getTime(), desktop: 261, mobile: 190 },
+  { date: new Date("2024-04-08").getTime(), desktop: 261, mobile: 190 },
+  { date: new Date("2024-04-09").getTime(), desktop: 261, mobile: 190 },
+  { date: new Date("2024-04-10").getTime(), desktop: 261, mobile: 190 },
+  { date: new Date("2024-04-11").getTime(), desktop: 327, mobile: 350 },
+  { date: new Date("2024-04-12").getTime(), desktop: 292, mobile: 210 },
+  { date: new Date("2024-04-13").getTime(), desktop: 342, mobile: 380 },
 ];
 
 const chartConfig = {
@@ -59,7 +60,7 @@ const Chart = () => {
           tickLine={false}
           axisLine={false}
           tickMargin={8}
-          minTickGap={32}
+          minTickGap={16}
           tickFormatter={(value) => {
             const date = new Date(value);
             return date.toLocaleDateString("en-US", {
@@ -72,9 +73,10 @@ const Chart = () => {
           content={
             <ChartTooltipContent
               className="w-[150px]"
-              nameKey="views"
-              labelFormatter={(value) => {
-                return new Date(value).toLocaleDateString("en-US", {
+              labelFormatter={(_, payload) => {
+                const [data] = payload;
+
+                return new Date(data.payload.date).toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
                   year: "numeric",
