@@ -29,8 +29,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
         <Navbar />
-        <main className="container">{children}</main>
-        <footer className="container">Footer</footer>
+        <main className="px-5 xl:px-10 2xl:container">{children}</main>
+        <footer className="px-5 xl:px-10 2xl:container py-5">Footer</footer>
       </body>
     </html>
   );

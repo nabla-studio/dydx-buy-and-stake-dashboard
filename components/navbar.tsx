@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 
 export const Navbar = () => (
-  <nav className="container py-5 flex items-center justify-between">
+  <nav className="px-5 xl:px-10 2xl:container py-5 flex items-center justify-between">
     <Link href="/">
       <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
     </Link>

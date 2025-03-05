@@ -1,4 +1,7 @@
 import { CirculatingSupplySection } from "@/components/circulating-supply-section";
+import { PurchasedBalanceCard } from "@/components/purchased-balance-card";
+import { PurchasedChartCard } from "@/components/purchased-chart-card";
+import { PurchasedUsdCard } from "@/components/purchased-usd-card";
 
 export default function Home() {
   return (
@@ -7,8 +10,12 @@ export default function Home() {
         Dashboard
       </h1>
 
-      <div className="grid md:grid-cols-3">
+      <div className="grid gap-5 md:gap-8 md:grid-cols-3">
         <CirculatingSupplySection className="md:col-span-full" />
+
+        <PurchasedChartCard />
+        <PurchasedUsdCard />
+        <PurchasedBalanceCard />
       </div>
     </section>
   );
