@@ -1,7 +1,7 @@
 import { BalanceChartSection } from "@/components/balance-chart-section";
 import { CirculatingSupplySection } from "@/components/circulating-supply-section";
 import { EarnUsdCard } from "@/components/earn-usd-card";
-import { PurchasedBalanceCard } from "@/components/purchased-balance-card";
+import { PurchasedBalanceChartCard } from "@/components/purchased-balance-chart-card";
 import { PurchasedChartCard } from "@/components/purchased-chart-card";
 import { PurchasedUsdCard } from "@/components/purchased-usd-card";
 import { StakedChartCard } from "@/components/staked-chart-card";
@@ -20,7 +20,7 @@ export default function Home() {
 
         <PurchasedChartCard />
         <PurchasedUsdCard />
-        <PurchasedBalanceCard />
+        <PurchasedBalanceChartCard />
 
         <StakedChartCard />
         <StakedRadialChartCard />
