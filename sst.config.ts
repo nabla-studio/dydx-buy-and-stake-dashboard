@@ -5,44 +5,40 @@
 const { DOMAIN_NAME, DOMAIN_CERT_ARN } = process.env;
 
 export default $config({
-	app(input) {
-		return {
-			name: "dydx-buy-and-stake-dashboard",
-			removal: input?.stage === "prod" ? "retain" : "remove",
-			protect: ["prod"].includes(input?.stage),
-			home: "aws",
-		};
-	},
-	async run() {
-		const dashboard = new sst.aws.StaticSite("Dashboard", {
-			// Define building commands
-			build: {
-				command: "npm run build",
-				output: "dist",
-			},
-			transform: {
-				cdn: {
-					// Avoid to wait for the CloudFront distribution to be deployed before
-					// completing the deployment of the app
-					wait: false,
+  app(input) {
+    return {
+      name: "dydx-buy-and-stake-dashboard",
+      removal: input?.stage === "prod" ? "retain" : "remove",
+      protect: ["prod"].includes(input?.stage),
+      home: "aws",
+    };
+  },
+  async run() {
+    new sst.aws.StaticSite("Dashboard", {
+      // Define building commands
+      build: {
+        command: "npm run build",
+        output: "dist",
+      },
+      transform: {
+        cdn: {
+          // Avoid to wait for the CloudFront distribution to be deployed before
+          // completing the deployment of the app
+          wait: false,
 
-					comment: `${$app.stage} dydx dashboard site`,
+          comment: `${$app.stage} dydx dashboard site`,
 
-					// Add custom domain only if provided
-					...(DOMAIN_NAME &&
-						DOMAIN_CERT_ARN && {
-							domain: {
-								name: DOMAIN_NAME,
-								dns: false,
-								cert: DOMAIN_CERT_ARN,
-							},
-						}),
-				},
-			},
-		});
-
-		return {
-			dashboardURL: dashboard.url,
-		};
-	},
+          // Add custom domain only if provided
+          ...(DOMAIN_NAME &&
+            DOMAIN_CERT_ARN && {
+              domain: {
+                name: DOMAIN_NAME,
+                dns: false,
+                cert: DOMAIN_CERT_ARN,
+              },
+            }),
+        },
+      },
+    });
+  },
 });
