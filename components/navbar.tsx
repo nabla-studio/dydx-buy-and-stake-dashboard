@@ -1,9 +1,12 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
 
 export const Navbar = () => (
   <nav className="container py-5 flex items-center justify-between">
-    <Link href="/">Logo</Link>
+    <Link href="/">
+      <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
+    </Link>
 
     <Button asChild>
       <Link href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard">
