@@ -1,3 +1,4 @@
+import { BalanceChartSection } from "@/components/balance-chart-section";
 import { CirculatingSupplySection } from "@/components/circulating-supply-section";
 import { EarnUsdCard } from "@/components/earn-usd-card";
 import { PurchasedBalanceCard } from "@/components/purchased-balance-card";
@@ -24,6 +25,8 @@ export default function Home() {
         <StakedChartCard />
         <StakedRadialChartCard />
         <EarnUsdCard />
+
+        <BalanceChartSection className="md:col-span-full" />
 
         <TransactionsTable />
       </div>
