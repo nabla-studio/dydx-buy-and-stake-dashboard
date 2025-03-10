@@ -6,7 +6,7 @@ interface GetCirculatingSupplyHistoryResponse {
 }
 
 export const getCirculatingSupplyHistory = () =>
-  apiClient.get<GetCirculatingSupplyHistoryResponse[]>("circulating");
+  apiClient.get<GetCirculatingSupplyHistoryResponse[]>("circulating").json();
 
 interface GetGenericMetricsResponse {
   timestamp: string;
@@ -19,4 +19,4 @@ interface GetGenericMetricsResponse {
 }
 
 export const getGenericMetrics = () =>
-  apiClient.get<GetGenericMetricsResponse[]>("generic-metrics");
+  apiClient.get<GetGenericMetricsResponse[]>("generic-metrics").json();
