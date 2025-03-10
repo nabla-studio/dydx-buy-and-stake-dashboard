@@ -20,8 +20,8 @@ import { cn } from "@/lib/utils";
 import { circulatingSupplyHistoryQuery } from "@/queries/options";
 import { formatCompactNumber } from "@/utils/number";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import type { ComponentProps } from "react";
+import { ChartLoader } from "./chart-loader";
 
 const chartConfig = {
   views: {
@@ -86,11 +86,7 @@ export function CirculatingSupplySection({
         </div>
       </CardHeader>
       <CardContent className="relative px-2 sm:p-6">
-        {isLoading ? (
-          <div className="flex left-0 top-0 absolute w-full h-full justify-center items-center">
-            <Loader2 className="size-14 animate-spin" />
-          </div>
-        ) : null}
+        {isLoading ? <ChartLoader /> : null}
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[250px] w-full"
