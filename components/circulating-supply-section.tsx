@@ -15,10 +15,12 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { circulatingSupplyHistoryQuery } from "@/queries/options";
 import { formatCompactNumber } from "@/utils/number";
 import { useQuery } from "@tanstack/react-query";
+import { Loader2 } from "lucide-react";
 import type { ComponentProps } from "react";
 
 const chartConfig = {
@@ -71,15 +73,24 @@ export function CirculatingSupplySection({
             <span className="text-xs text-muted-foreground">
               Current supply
             </span>
-            <span className="text-lg font-bold leading-none sm:text-3xl">
-              {currentSupply?.circulatingSupply
-                ? formatCompactNumber(currentSupply.circulatingSupply)
-                : null}
-            </span>
+            {isLoading ? (
+              <Skeleton className="h-9 w-24 sm:h-[2.25rem] sm:w-32" />
+            ) : (
+              <span className="text-lg font-bold leading-none sm:text-3xl">
+                {currentSupply?.circulatingSupply
+                  ? formatCompactNumber(currentSupply.circulatingSupply)
+                  : null}
+              </span>
+            )}
           </div>
         </div>
       </CardHeader>
-      <CardContent className="px-2 sm:p-6">
+      <CardContent className="relative px-2 sm:p-6">
+        {isLoading ? (
+          <div className="flex left-0 top-0 absolute w-full h-full justify-center items-center">
+            <Loader2 className="size-14 animate-spin" />
+          </div>
+        ) : null}
         <ChartContainer
           config={chartConfig}
           className="aspect-auto h-[250px] w-full"
@@ -127,6 +138,7 @@ export function CirculatingSupplySection({
               stroke="var(--color-circulatingSupply)"
               strokeWidth={2}
               dot={false}
+              isAnimationActive={false}
             />
           </LineChart>
         </ChartContainer>
