@@ -24,7 +24,8 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-4xl font-bold">9999 $</h3>
+        <h3 className="text-foreground text-4xl font-bold">9999</h3>
+        <p className="text-muted-foreground text-xs">USD</p>
       </div>
     </GenericCard>
   );

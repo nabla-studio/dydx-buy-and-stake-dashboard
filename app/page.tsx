@@ -9,7 +9,6 @@ import { TotalDydxCard } from "@/components/total-dydx-card";
 import { TotalFeesCard } from "@/components/total-fees-card";
 import { TotalStakedCard } from "@/components/total-staked-card";
 import { TotalUSDCard } from "@/components/total-usd-card";
-import { TransactionsTable } from "@/components/transactions-table";
 import { WalletsCard } from "@/components/wallets-card";
 
 export default function Home() {
@@ -41,8 +40,6 @@ export default function Home() {
         <PriceCard />
         <WalletsCard />
         <GrowthChartCard />
-
-        <TransactionsTable />
       </div>
     </section>
   );
