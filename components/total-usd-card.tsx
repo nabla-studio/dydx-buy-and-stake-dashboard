@@ -15,17 +15,16 @@ const Footer = () => {
   );
 };
 
-export function PurchasedUsdCard({ ...rest }: ComponentProps<"div">) {
+export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
-      title="Purchased"
+      title="Total USD"
       description="It refers to the number of tokens that are purchased by dYdX foundation."
       footer={<Footer />}
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-4xl font-bold">1260</h3>
-        <p className="text-muted-foreground text-xs">USD</p>
+        <h3 className="text-foreground text-4xl font-bold">9999 $</h3>
       </div>
     </GenericCard>
   );

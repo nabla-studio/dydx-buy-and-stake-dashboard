@@ -81,12 +81,12 @@ const Chart = () => {
   );
 };
 
-export function StakedChartCard({ ...rest }: ComponentProps<"div">) {
+export function GrowthChartCard({ ...rest }: ComponentProps<"div">) {
   const { isLoading } = useQuery(genericMetricsQuery);
 
   return (
     <GenericCard
-      title="Staked"
+      title="Growth"
       description="It refers to the number of tokens that are purchased by dYdX foundation."
       className="relative"
       {...rest}
