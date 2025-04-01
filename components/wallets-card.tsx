@@ -24,8 +24,8 @@ export function WalletsCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="N° Wallet"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Wallets Holding DYDX"
+      description="Number of wallets holding any DYDX balance."
       footer={<Footer />}
       {...rest}
     >

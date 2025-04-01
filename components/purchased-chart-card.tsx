@@ -86,8 +86,8 @@ export function PurchasedChartCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Purchased"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Protocol Revenue vs Buybacks Over Time"
+      description="Comparison of protocol revenue and buyback allocations."
       className="relative"
       {...rest}
     >

@@ -102,8 +102,8 @@ export function GrowthChartCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Growth"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Wallet Growth Over Time"
+      description="Historical growth in the number of DYDX-holding wallets."
       className="relative"
       {...rest}
     >

@@ -24,8 +24,8 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="DYDX Price"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="DYDX Price (24h Change)"
+      description="Live market price of DYDX."
       footer={<Footer />}
       {...rest}
     >

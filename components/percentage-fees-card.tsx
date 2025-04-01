@@ -18,8 +18,8 @@ const Footer = () => {
 export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
-      title="Percentage Fees"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="% of Fees Allocated to Buybacks"
+      description="Share of protocol fees directed to the Buyback Program."
       footer={<Footer />}
       {...rest}
     >

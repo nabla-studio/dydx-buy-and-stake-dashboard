@@ -24,8 +24,8 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Total USD"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Total USD Value of Buybacks"
+      description="Aggregate value of all buybacks, converted in USD."
       footer={<Footer />}
       {...rest}
     >

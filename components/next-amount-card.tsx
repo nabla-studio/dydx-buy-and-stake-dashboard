@@ -18,8 +18,8 @@ const Footer = () => {
 export function NextAmountCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
-      title="Next Amount"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Next Buyback Amount (DYDX)"
+      description="Estimated DYDX to be bought back, calculated in real-time based on USDC accrued in the Buyback wallet."
       footer={<Footer />}
       {...rest}
     >

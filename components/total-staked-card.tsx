@@ -24,8 +24,8 @@ export function TotalStakedCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Total Staked"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Total DYDX Staked"
+      description="Total DYDX currently staked across the entire network."
       footer={<Footer />}
       {...rest}
     >

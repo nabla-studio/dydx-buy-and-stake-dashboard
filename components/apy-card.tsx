@@ -24,8 +24,8 @@ export function ApyCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="APY"
-      description="It refers to the number of tokens that are purchased by dYdX foundation."
+      title="Estimated APY on Staked DYDX"
+      description="Annualized return on staked DYDX, based on current network parameters."
       footer={<Footer />}
       {...rest}
     >
