@@ -116,6 +116,17 @@ export const stakingApyQuery = queryOptions({
   },
 });
 
+export const buybackFeeShareQuery = queryOptions({
+  ...stakingSupplyHistoryQuery(),
+  select(points) {
+    const point = [...points].pop();
+
+    return point?.buybackFeeShare !== undefined
+      ? formatPercentageNumber(point.buybackFeeShare)
+      : undefined;
+  },
+});
+
 export const totalWalletsQuery = queryOptions({
   queryKey: ["total-wallets"],
   queryFn: getTotalWallets,

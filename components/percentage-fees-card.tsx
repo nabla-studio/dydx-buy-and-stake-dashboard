@@ -1,7 +1,6 @@
 "use client";
 
-import { stakingSupplyHistoryQuery } from "@/queries/options";
-import { formatPercentageNumber } from "@/utils/number";
+import { buybackFeeShareQuery } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -20,18 +19,8 @@ const Footer = () => {
   );
 };
 
-const startOfYear = new Date(new Date().getFullYear(), 0, 1); // January 1st of current year
-const today = new Date();
-
 export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
-  const { data } = useQuery({
-    ...stakingSupplyHistoryQuery(startOfYear, today),
-    select(data) {
-      return formatPercentageNumber(
-        data.map((el) => el.buybackFeeShare).reduce((p, c) => p + c, 0),
-      );
-    },
-  });
+  const { data } = useQuery(buybackFeeShareQuery);
 
   return (
     <GenericCard
