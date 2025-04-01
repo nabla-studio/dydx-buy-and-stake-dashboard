@@ -1,6 +1,5 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
 import {
   Label,
@@ -80,25 +79,11 @@ const Chart = () => {
   );
 };
 
-const Footer = () => {
-  return (
-    <>
-      <div className="flex items-center gap-2 font-medium leading-none">
-        Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-      </div>
-      <div className="leading-none text-muted-foreground">
-        Showing total visitors for the last 6 months
-      </div>
-    </>
-  );
-};
-
 export function StakedRadialChartCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="Staked"
       description="It refers to the number of tokens that are staked by dYdX foundation."
-      footer={<Footer />}
       {...rest}
     >
       <Chart />

@@ -12,9 +12,6 @@ const Footer = () => {
       <div className="flex items-center gap-2 font-medium leading-none">
         Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
       </div>
-      <div className="leading-none text-muted-foreground">
-        Showing total visitors for the last 6 months
-      </div>
     </>
   );
 };
@@ -31,7 +28,7 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
     >
       <div className="flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">{data}</h3>
-        <p className="text-muted-foreground text-xs">USD</p>
+        <p className="text-primary text-xs">USD</p>
       </div>
     </GenericCard>
   );

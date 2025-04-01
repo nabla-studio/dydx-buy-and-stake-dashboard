@@ -20,9 +20,10 @@ export default function Home() {
       </h1>
 
       <div className="text-base text-muted-foreground mb-10">
-        The <strong>dYdX Buyback Program</strong> was launched by the{" "}
+        The <strong className="text-foreground">dYdX Buyback Program</strong>{" "}
+        was launched by the{" "}
         <a
-          className="underline"
+          className="text-primary"
           href="https://www.google.com/url?q=https://dydx.forum/t/drc-dydx-treasury-subdao-dydx-buyback-program/3433&sa=D&source=docs&ust=1743515327000781&usg=AOvVaw2bZCqQaUDax5-xa41_5N4B"
           target="_blank"
           rel="noreferrer"
@@ -40,7 +41,7 @@ export default function Home() {
               href="https://www.mintscan.io/dydx/proposals/225"
               target="_blank"
               rel="noreferrer"
-              className="underline"
+              className="text-primary"
             >
               Proposal #225 - Initial Buyback Activation
             </a>
@@ -50,7 +51,7 @@ export default function Home() {
               href="https://www.mintscan.io/dydx/proposals/231"
               target="_blank"
               rel="noreferrer"
-              className="underline"
+              className="text-primary"
             >
               Proposal #231 - dYdX Treasury SubDAO DYDX Buyback Program (Stage
               2)
@@ -69,16 +70,24 @@ export default function Home() {
         <NextAmountCard />
 
         <div className="col-span-full">
-          <p>Lorem ipsum</p>
+          <p className="font-bold">Protocol data</p>
         </div>
 
         <PurchasedChartCard />
         <TotalFeesCard />
         <PercentageFeesCard />
 
+        <div className="col-span-full">
+          <p className="font-bold">Staking overview</p>
+        </div>
+
         <TotalStakedCard />
         <AmountStakedCard />
         <ApyCard />
+
+        <div className="col-span-full">
+          <p className="font-bold">Network stats</p>
+        </div>
 
         <PriceCard />
         <WalletsCard />

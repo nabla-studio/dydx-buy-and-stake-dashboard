@@ -63,8 +63,6 @@ const Chart = () => {
     [dataGenericMetrics, dataStakingSupply],
   );
 
-  console.log(data);
-
   return (
     <ChartContainer
       config={chartConfig}

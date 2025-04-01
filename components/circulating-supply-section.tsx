@@ -102,6 +102,7 @@ export function CirculatingSupplySection({
               top: 12,
               left: 12,
               right: 12,
+              bottom: 12,
             }}
           >
             <CartesianGrid vertical={false} />
