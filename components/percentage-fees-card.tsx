@@ -1,3 +1,8 @@
+"use client";
+
+import { stakingSupplyHistoryQuery } from "@/queries/options";
+import { formatPercentageNumber } from "@/utils/number";
+import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
 import { GenericCard } from "./generic-card";
@@ -15,7 +20,19 @@ const Footer = () => {
   );
 };
 
+const startOfYear = new Date(new Date().getFullYear(), 0, 1); // January 1st of current year
+const today = new Date();
+
 export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
+  const { data } = useQuery({
+    ...stakingSupplyHistoryQuery(startOfYear, today),
+    select(data) {
+      return formatPercentageNumber(
+        data.map((el) => el.buybackFeeShare).reduce((p, c) => p + c, 0),
+      );
+    },
+  });
+
   return (
     <GenericCard
       title="% of Fees Allocated to Buybacks"
@@ -24,8 +41,7 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-4xl font-bold">10</h3>
-        <p className="text-muted-foreground text-xs">%</p>
+        <h3 className="text-foreground text-4xl font-bold">{data}</h3>
       </div>
     </GenericCard>
   );

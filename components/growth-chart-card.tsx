@@ -24,12 +24,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const Chart = () => {
-  const { data } = useQuery({
-    ...stakingSupplyHistoryQuery(),
-    select(data) {
-      return data.reverse();
-    },
-  });
+  const { data } = useQuery(stakingSupplyHistoryQuery());
 
   const minMax = useMemo(() => {
     if (!data?.length) return undefined;

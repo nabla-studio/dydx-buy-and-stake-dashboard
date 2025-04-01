@@ -55,7 +55,7 @@ export const genericMetricsQuery = (
 export const totalDydxBoughtBackQuery = queryOptions({
   ...genericMetricsQuery(),
   select(points) {
-    const [point] = points;
+    const point = [...points].pop();
 
     return point ? formatCompactNumber(point.dydxAcquired) : undefined;
   },
@@ -64,7 +64,7 @@ export const totalDydxBoughtBackQuery = queryOptions({
 export const totalUsdBoughtBackQuery = queryOptions({
   ...genericMetricsQuery(),
   select(points) {
-    const [point] = points;
+    const point = [...points].pop();
 
     return point
       ? formatCurrencyNumber(point.dydxAcquired * point.priceDYDX)
@@ -75,7 +75,7 @@ export const totalUsdBoughtBackQuery = queryOptions({
 export const dydxPriceQuery = queryOptions({
   ...genericMetricsQuery(),
   select(points) {
-    const [point] = points;
+    const point = [...points].pop();
 
     return point?.priceDYDX !== undefined
       ? formatCurrencyNumber(point.priceDYDX)
@@ -86,7 +86,7 @@ export const dydxPriceQuery = queryOptions({
 export const stakingSupplyQuery = queryOptions({
   ...stakingSupplyHistoryQuery(),
   select(points) {
-    const [point] = points;
+    const point = [...points].pop();
 
     return point?.stakingSupply !== undefined
       ? formatCompactNumber(point.stakingSupply)
@@ -97,7 +97,7 @@ export const stakingSupplyQuery = queryOptions({
 export const stakingBalanceQuery = queryOptions({
   ...genericMetricsQuery(),
   select(points) {
-    const [point] = points;
+    const point = [...points].pop();
 
     return point?.stakingBalance !== undefined
       ? formatCompactNumber(point.stakingBalance)
@@ -108,7 +108,7 @@ export const stakingBalanceQuery = queryOptions({
 export const stakingApyQuery = queryOptions({
   ...stakingSupplyHistoryQuery(),
   select(points) {
-    const [point] = points;
+    const point = [...points].pop();
 
     return point?.stakingApr !== undefined
       ? formatPercentageNumber((point.stakingApr / 100) * 12)

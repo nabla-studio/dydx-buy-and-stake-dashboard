@@ -20,7 +20,8 @@ export const getStakingSupplyHistory = (payload: Filters) =>
     .get<GetStakingSupplyHistoryResponse[]>("dydx/tokenomics/staking_supply", {
       searchParams: payload,
     })
-    .json();
+    .json()
+    .then((data) => data.reverse());
 
 interface GetCirculatingSupplyHistoryResponse {
   average_circulationsupply: `${number}`;
@@ -79,4 +80,5 @@ export const getGenericMetrics = (filters: Filters) =>
         searchParams: filters,
       },
     )
-    .json();
+    .json()
+    .then((data) => data.reverse());
