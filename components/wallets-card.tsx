@@ -1,6 +1,6 @@
 "use client";
 
-import { historicUsersQuery } from "@/queries/options";
+import { totalWalletsQuery } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -20,7 +20,7 @@ const Footer = () => {
 };
 
 export function WalletsCard({ ...rest }: ComponentProps<"div">) {
-  const { data } = useQuery(historicUsersQuery);
+  const { data } = useQuery(totalWalletsQuery);
 
   return (
     <GenericCard

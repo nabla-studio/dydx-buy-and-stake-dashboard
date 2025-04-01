@@ -1,5 +1,10 @@
 import { apiClient } from "./client";
 
+interface Filters extends Record<string, string> {
+  start_date: string;
+  end_date: string;
+}
+
 interface GetStakingSupplyHistoryResponse {
   labels: string;
   stakingSupply: number;
@@ -10,9 +15,11 @@ interface GetStakingSupplyHistoryResponse {
   historicUsers: number;
 }
 
-export const getStakingSupplyHistory = () =>
+export const getStakingSupplyHistory = (payload: Filters) =>
   apiClient
-    .get<GetStakingSupplyHistoryResponse[]>("dydx/tokenomics/staking_supply")
+    .get<GetStakingSupplyHistoryResponse[]>("dydx/tokenomics/staking_supply", {
+      searchParams: payload,
+    })
     .json();
 
 interface GetCirculatingSupplyHistoryResponse {
@@ -28,6 +35,27 @@ export const getCirculatingSupplyHistory = () =>
         prefixUrl: "https://api.lacertalabs.xyz",
       },
     )
+    .json();
+
+interface GetTotalWalletsResponse {
+  denom_owners: {
+    address: string;
+    balance: {
+      denom: string;
+      amount: `${number}`;
+    };
+  }[];
+  pagination: {
+    next_key: string;
+    total: `${number}`;
+  };
+}
+
+export const getTotalWallets = () =>
+  apiClient
+    .get<GetTotalWalletsResponse>("cosmos/bank/v1beta1/denom_owners/adydx", {
+      prefixUrl: "https://dydx-lcd.numia.xyz",
+    })
     .json();
 
 interface GetGenericMetricsResponse {

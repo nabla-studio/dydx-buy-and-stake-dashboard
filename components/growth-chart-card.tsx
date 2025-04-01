@@ -1,9 +1,9 @@
 "use client";
 
-import { genericMetricsQuery } from "@/queries/options";
+import { stakingSupplyHistoryQuery } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
-import type { ComponentProps } from "react";
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
+import { type ComponentProps, useMemo } from "react";
+import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { ChartLoader } from "./chart-loader";
 import { GenericCard } from "./generic-card";
 import {
@@ -17,14 +17,28 @@ const chartConfig = {
   views: {
     label: "DYDX",
   },
-  stakingBalance: {
-    label: "Balance",
+  historicUsers: {
+    label: "Wallets",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 
 const Chart = () => {
-  const { data } = useQuery(genericMetricsQuery);
+  const { data } = useQuery({
+    ...stakingSupplyHistoryQuery,
+    select(data) {
+      return data.reverse();
+    },
+  });
+
+  const minMax = useMemo(() => {
+    if (!data?.length) return undefined;
+
+    const min = Math.min(...data.map((d) => d.historicUsers));
+    const max = Math.max(...data.map((d) => d.historicUsers));
+
+    return [min, max];
+  }, [data]);
 
   return (
     <ChartContainer
@@ -35,6 +49,7 @@ const Chart = () => {
         accessibilityLayer
         data={data}
         margin={{
+          top: 12,
           left: 12,
           right: 12,
         }}
@@ -54,6 +69,7 @@ const Chart = () => {
             });
           }}
         />
+        <YAxis tickLine={false} axisLine={false} hide domain={minMax} />
         <ChartTooltip
           content={
             <ChartTooltipContent
@@ -69,9 +85,9 @@ const Chart = () => {
           }
         />
         <Line
-          dataKey="stakingBalance"
+          dataKey="historicUsers"
           type="monotone"
-          stroke="var(--color-stakingBalance)"
+          stroke="var(--color-historicUsers)"
           strokeWidth={2}
           dot={false}
           isAnimationActive={false}
@@ -82,7 +98,7 @@ const Chart = () => {
 };
 
 export function GrowthChartCard({ ...rest }: ComponentProps<"div">) {
-  const { isLoading } = useQuery(genericMetricsQuery);
+  const { isLoading } = useQuery(stakingSupplyHistoryQuery);
 
   return (
     <GenericCard

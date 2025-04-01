@@ -2,6 +2,7 @@ import {
   getCirculatingSupplyHistory,
   getGenericMetrics,
   getStakingSupplyHistory,
+  getTotalWallets,
 } from "@/services/numia";
 import {
   formatCompactNumber,
@@ -15,9 +16,22 @@ export const circulatingSupplyHistoryQuery = queryOptions({
   queryFn: getCirculatingSupplyHistory,
 });
 
+const today = new Date();
+const thirtyDaysAgo = new Date();
+thirtyDaysAgo.setDate(today.getDate() - 30);
+
+const formatDate = (date: Date) => {
+  return date.toISOString().split("T")[0]; // YYYY-MM-DD format
+};
+
 export const stakingSupplyHistoryQuery = queryOptions({
-  queryKey: ["staking-supply-history"],
-  queryFn: getStakingSupplyHistory,
+  queryKey: ["staking-supply-history", thirtyDaysAgo, today],
+  queryFn: () => {
+    return getStakingSupplyHistory({
+      start_date: formatDate(thirtyDaysAgo),
+      end_date: formatDate(today),
+    });
+  },
 });
 
 export const genericMetricsQuery = queryOptions({
@@ -80,13 +94,10 @@ export const stakingApyQuery = queryOptions({
   },
 });
 
-export const historicUsersQuery = queryOptions({
-  ...stakingSupplyHistoryQuery,
-  select(points) {
-    const [point] = points;
-
-    return point?.historicUsers !== undefined
-      ? formatCompactNumber(point.historicUsers)
-      : undefined;
+export const totalWalletsQuery = queryOptions({
+  queryKey: ["total-wallets"],
+  queryFn: getTotalWallets,
+  select(data) {
+    return formatCompactNumber(data.pagination.total);
   },
 });
