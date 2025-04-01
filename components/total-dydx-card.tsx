@@ -16,7 +16,7 @@ export function TotalDydxCard({ ...rest }: ComponentProps<"div">) {
     >
       <div className="flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">{data}</h3>
-        <p className="text-primary text-xs">DYDX</p>
+        <p className="text-primary text-sm">DYDX</p>
       </div>
     </GenericCard>
   );

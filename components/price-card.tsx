@@ -74,7 +74,7 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
     >
       <div className="flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">{data}</h3>
-        <p className="text-primary text-xs">USD</p>
+        <p className="text-primary text-sm">USD</p>
       </div>
     </GenericCard>
   );
