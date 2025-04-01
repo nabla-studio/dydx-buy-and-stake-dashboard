@@ -1,6 +1,7 @@
 import {
   getCirculatingSupplyHistory,
   getGenericMetrics,
+  getStakingSupplyHistory,
 } from "@/services/numia";
 import {
   formatCompactNumber,
@@ -14,9 +15,25 @@ export const circulatingSupplyHistoryQuery = queryOptions({
   queryFn: getCirculatingSupplyHistory,
 });
 
+export const stakingSupplyHistoryQuery = queryOptions({
+  queryKey: ["staking-supply-history"],
+  queryFn: getStakingSupplyHistory,
+});
+
 export const genericMetricsQuery = queryOptions({
   queryKey: ["generic-metrics"],
   queryFn: getGenericMetrics,
+});
+
+export const circulatingSupplyQuery = queryOptions({
+  ...circulatingSupplyHistoryQuery,
+  select(points) {
+    const point = points["0"];
+
+    return point
+      ? formatCompactNumber(point.average_circulationsupply)
+      : undefined;
+  },
 });
 
 export const dydxPriceQuery = queryOptions({
@@ -31,7 +48,7 @@ export const dydxPriceQuery = queryOptions({
 });
 
 export const stakingSupplyQuery = queryOptions({
-  ...circulatingSupplyHistoryQuery,
+  ...stakingSupplyHistoryQuery,
   select(points) {
     const [point] = points;
 
@@ -53,7 +70,7 @@ export const stakingBalanceQuery = queryOptions({
 });
 
 export const stakingApyQuery = queryOptions({
-  ...circulatingSupplyHistoryQuery,
+  ...stakingSupplyHistoryQuery,
   select(points) {
     const [point] = points;
 
@@ -64,7 +81,7 @@ export const stakingApyQuery = queryOptions({
 });
 
 export const historicUsersQuery = queryOptions({
-  ...circulatingSupplyHistoryQuery,
+  ...stakingSupplyHistoryQuery,
   select(points) {
     const [point] = points;
 

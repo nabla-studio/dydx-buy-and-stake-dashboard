@@ -1,6 +1,6 @@
 import { apiClient } from "./client";
 
-interface GetCirculatingSupplyHistoryResponse {
+interface GetStakingSupplyHistoryResponse {
   labels: string;
   stakingSupply: number;
   stakingApr: number;
@@ -10,10 +10,23 @@ interface GetCirculatingSupplyHistoryResponse {
   historicUsers: number;
 }
 
+export const getStakingSupplyHistory = () =>
+  apiClient
+    .get<GetStakingSupplyHistoryResponse[]>("dydx/tokenomics/staking_supply")
+    .json();
+
+interface GetCirculatingSupplyHistoryResponse {
+  average_circulationsupply: `${number}`;
+  day: string;
+}
+
 export const getCirculatingSupplyHistory = () =>
   apiClient
-    .get<GetCirculatingSupplyHistoryResponse[]>(
-      "dydx/tokenomics/staking_supply",
+    .get<Record<string, GetCirculatingSupplyHistoryResponse>>(
+      "data/circulationsupply",
+      {
+        prefixUrl: "https://api.lacertalabs.xyz",
+      },
     )
     .json();
 
