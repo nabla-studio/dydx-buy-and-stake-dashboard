@@ -41,7 +41,7 @@ const Chart = () => {
       >
         <CartesianGrid vertical={false} />
         <XAxis
-          dataKey="timestamp"
+          dataKey="labels"
           tickLine={false}
           axisLine={false}
           tickMargin={8}
