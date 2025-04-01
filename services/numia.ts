@@ -36,7 +36,8 @@ export const getCirculatingSupplyHistory = () =>
         prefixUrl: "https://api.lacertalabs.xyz",
       },
     )
-    .json();
+    .json()
+    .then((el) => Object.values(el).reverse());
 
 interface GetTotalWalletsResponse {
   denom_owners: {

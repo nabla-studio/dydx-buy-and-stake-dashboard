@@ -1,5 +1,6 @@
 import { AmountStakedCard } from "@/components/amount-staked-card";
 import { ApyCard } from "@/components/apy-card";
+import { CirculatingSupplySection } from "@/components/circulating-supply-section";
 import { GrowthChartCard } from "@/components/growth-chart-card";
 import { NextAmountCard } from "@/components/next-amount-card";
 import { PercentageFeesCard } from "@/components/percentage-fees-card";
@@ -13,12 +14,12 @@ import { WalletsCard } from "@/components/wallets-card";
 
 export default function Home() {
   return (
-    <section>
+    <section className="pt-24">
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8">
         Dashboard
       </h1>
 
-      <div className="text-base mb-10">
+      <div className="text-base text-muted-foreground mb-10">
         The <strong>dYdX Buyback Program</strong> was launched by the{" "}
         <a
           className="underline"
@@ -61,6 +62,8 @@ export default function Home() {
       </div>
 
       <div className="grid gap-5 md:gap-8 md:grid-cols-3">
+        <CirculatingSupplySection className="md:col-span-full" />
+
         <TotalDydxCard />
         <TotalUSDCard />
         <NextAmountCard />

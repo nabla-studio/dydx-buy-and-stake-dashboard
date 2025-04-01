@@ -13,7 +13,7 @@ const Footer = () => {
         Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
       </div>
       <div className="leading-none text-muted-foreground">
-        Showing total visitors for the last 6 months
+        Cumulative DYDX repurchased since program launch.
       </div>
     </>
   );
@@ -23,14 +23,9 @@ export function TotalDydxCard({ ...rest }: ComponentProps<"div">) {
   const { data } = useQuery(totalDydxBoughtBackQuery);
 
   return (
-    <GenericCard
-      title="Total DYDX Bought Back"
-      description="Cumulative DYDX repurchased since program launch."
-      footer={<Footer />}
-      {...rest}
-    >
+    <GenericCard title="Total DYDX Bought Back" footer={<Footer />} {...rest}>
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-4xl font-bold">{data}</h3>
+        <h3 className="text-foreground text-7xl font-bold">{data}</h3>
       </div>
     </GenericCard>
   );
