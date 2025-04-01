@@ -1,8 +1,11 @@
 "use client";
 
-import { genericMetricsQuery } from "@/queries/options";
+import {
+  genericMetricsQuery,
+  stakingSupplyHistoryQuery,
+} from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useMemo } from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import { ChartLoader } from "./chart-loader";
 import { GenericCard } from "./generic-card";
@@ -17,14 +20,50 @@ const chartConfig = {
   views: {
     label: "DYDX",
   },
-  dydxAcquired: {
-    label: "Acquired",
+  protocolRevenue: {
+    label: "Protocol Revenue",
     color: "hsl(var(--chart-1))",
+  },
+  dydxAcquired: {
+    label: "Buyback",
+    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig;
 
+const startOfYear = new Date(new Date().getFullYear(), 0, 1); // January 1st of current year
+const today = new Date();
+
 const Chart = () => {
-  const { data } = useQuery(genericMetricsQuery);
+  const { data: dataGenericMetrics } = useQuery(
+    genericMetricsQuery(startOfYear, today),
+  );
+  const { data: dataStakingSupply } = useQuery(
+    stakingSupplyHistoryQuery(startOfYear, today),
+  );
+
+  const data = useMemo(
+    () =>
+      dataGenericMetrics?.map((genericMetric) => {
+        const stakingSupply = dataStakingSupply?.find((data) => {
+          const dataDate = new Date(data.labels);
+          const metricDate = new Date(genericMetric.labels);
+          return (
+            dataDate.getFullYear() === metricDate.getFullYear() &&
+            dataDate.getMonth() === metricDate.getMonth() &&
+            dataDate.getDate() === metricDate.getDate()
+          );
+        });
+
+        return {
+          labels: genericMetric.labels,
+          dydxAcquired: genericMetric.dydxAcquired,
+          protocolRevenue: stakingSupply?.protocolRevenue ?? 0,
+        };
+      }) ?? [],
+    [dataGenericMetrics, dataStakingSupply],
+  );
+
+  console.log(data);
 
   return (
     <ChartContainer
@@ -57,7 +96,7 @@ const Chart = () => {
         <ChartTooltip
           content={
             <ChartTooltipContent
-              className="w-[150px]"
+              className="w-[200px]"
               labelFormatter={(value) => {
                 return new Date(value).toLocaleDateString("en-US", {
                   month: "short",
@@ -67,6 +106,14 @@ const Chart = () => {
               }}
             />
           }
+        />
+        <Line
+          dataKey="protocolRevenue"
+          type="monotone"
+          stroke="var(--color-protocolRevenue)"
+          strokeWidth={2}
+          dot={false}
+          isAnimationActive={false}
         />
         <Line
           dataKey="dydxAcquired"
@@ -82,7 +129,14 @@ const Chart = () => {
 };
 
 export function PurchasedChartCard({ ...rest }: ComponentProps<"div">) {
-  const { isLoading } = useQuery(genericMetricsQuery);
+  const { isLoading: isLoadingGenericMetrics } = useQuery(
+    genericMetricsQuery(startOfYear, today),
+  );
+  const { isLoading: isLoadingStakingSupplyHistory } = useQuery(
+    stakingSupplyHistoryQuery(startOfYear, today),
+  );
+
+  const isLoading = isLoadingGenericMetrics || isLoadingStakingSupplyHistory;
 
   return (
     <GenericCard

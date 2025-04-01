@@ -24,23 +24,36 @@ const formatDate = (date: Date) => {
   return date.toISOString().split("T")[0]; // YYYY-MM-DD format
 };
 
-export const stakingSupplyHistoryQuery = queryOptions({
-  queryKey: ["staking-supply-history", thirtyDaysAgo, today],
-  queryFn: () => {
-    return getStakingSupplyHistory({
-      start_date: formatDate(thirtyDaysAgo),
-      end_date: formatDate(today),
-    });
-  },
-});
+export const stakingSupplyHistoryQuery = (
+  startDate = thirtyDaysAgo,
+  endDate = today,
+) =>
+  queryOptions({
+    queryKey: ["staking-supply-history", startDate, endDate],
+    queryFn: () => {
+      return getStakingSupplyHistory({
+        start_date: formatDate(startDate),
+        end_date: formatDate(endDate),
+      });
+    },
+  });
 
-export const genericMetricsQuery = queryOptions({
-  queryKey: ["generic-metrics"],
-  queryFn: getGenericMetrics,
-});
+export const genericMetricsQuery = (
+  startDate = thirtyDaysAgo,
+  endDate = today,
+) =>
+  queryOptions({
+    queryKey: ["generic-metrics"],
+    queryFn: () => {
+      return getGenericMetrics({
+        start_date: formatDate(startDate),
+        end_date: formatDate(endDate),
+      });
+    },
+  });
 
 export const totalDydxBoughtBackQuery = queryOptions({
-  ...genericMetricsQuery,
+  ...genericMetricsQuery(),
   select(points) {
     const [point] = points;
 
@@ -49,7 +62,7 @@ export const totalDydxBoughtBackQuery = queryOptions({
 });
 
 export const totalUsdBoughtBackQuery = queryOptions({
-  ...genericMetricsQuery,
+  ...genericMetricsQuery(),
   select(points) {
     const [point] = points;
 
@@ -60,7 +73,7 @@ export const totalUsdBoughtBackQuery = queryOptions({
 });
 
 export const dydxPriceQuery = queryOptions({
-  ...genericMetricsQuery,
+  ...genericMetricsQuery(),
   select(points) {
     const [point] = points;
 
@@ -71,7 +84,7 @@ export const dydxPriceQuery = queryOptions({
 });
 
 export const stakingSupplyQuery = queryOptions({
-  ...stakingSupplyHistoryQuery,
+  ...stakingSupplyHistoryQuery(),
   select(points) {
     const [point] = points;
 
@@ -82,7 +95,7 @@ export const stakingSupplyQuery = queryOptions({
 });
 
 export const stakingBalanceQuery = queryOptions({
-  ...genericMetricsQuery,
+  ...genericMetricsQuery(),
   select(points) {
     const [point] = points;
 
@@ -93,7 +106,7 @@ export const stakingBalanceQuery = queryOptions({
 });
 
 export const stakingApyQuery = queryOptions({
-  ...stakingSupplyHistoryQuery,
+  ...stakingSupplyHistoryQuery(),
   select(points) {
     const [point] = points;
 

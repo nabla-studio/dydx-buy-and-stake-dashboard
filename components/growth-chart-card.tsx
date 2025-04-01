@@ -25,7 +25,7 @@ const chartConfig = {
 
 const Chart = () => {
   const { data } = useQuery({
-    ...stakingSupplyHistoryQuery,
+    ...stakingSupplyHistoryQuery(),
     select(data) {
       return data.reverse();
     },
@@ -98,7 +98,7 @@ const Chart = () => {
 };
 
 export function GrowthChartCard({ ...rest }: ComponentProps<"div">) {
-  const { isLoading } = useQuery(stakingSupplyHistoryQuery);
+  const { isLoading } = useQuery(stakingSupplyHistoryQuery());
 
   return (
     <GenericCard

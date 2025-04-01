@@ -71,9 +71,12 @@ interface GetGenericMetricsResponse {
   stakingRewardsClaimedUSDC: number;
 }
 
-export const getGenericMetrics = () =>
+export const getGenericMetrics = (filters: Filters) =>
   apiClient
     .get<GetGenericMetricsResponse[]>(
       "dydx/tokenomics/buystake_address_metrics",
+      {
+        searchParams: filters,
+      },
     )
     .json();
