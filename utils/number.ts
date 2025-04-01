@@ -7,7 +7,6 @@ export const formatCompactNumber = (number: number) => {
 
 export const formatCurrencyNumber = (number: number) => {
   return new Intl.NumberFormat("en", {
-    style: "currency",
     notation: "compact",
     maximumFractionDigits: 2,
   }).format(number);

@@ -22,19 +22,43 @@ export const genericMetricsQuery = queryOptions({
 export const dydxPriceQuery = queryOptions({
   ...genericMetricsQuery,
   select(points) {
-    const point = [...points].pop();
+    const [point] = points;
 
-    return point?.priceDYDX ? formatCurrencyNumber(point.priceDYDX) : undefined;
+    return point?.priceDYDX !== undefined
+      ? formatCurrencyNumber(point.priceDYDX)
+      : undefined;
+  },
+});
+
+export const stakingSupplyQuery = queryOptions({
+  ...circulatingSupplyHistoryQuery,
+  select(points) {
+    const [point] = points;
+
+    return point?.stakingSupply !== undefined
+      ? formatCompactNumber(point.stakingSupply)
+      : undefined;
+  },
+});
+
+export const stakingBalanceQuery = queryOptions({
+  ...genericMetricsQuery,
+  select(points) {
+    const [point] = points;
+
+    return point?.stakingBalance !== undefined
+      ? formatCompactNumber(point.stakingBalance)
+      : undefined;
   },
 });
 
 export const stakingApyQuery = queryOptions({
   ...circulatingSupplyHistoryQuery,
   select(points) {
-    const point = [...points].pop();
+    const [point] = points;
 
-    return point?.stakingApr
-      ? formatPercentageNumber(point.stakingApr * 12)
+    return point?.stakingApr !== undefined
+      ? formatPercentageNumber((point.stakingApr / 100) * 12)
       : undefined;
   },
 });
@@ -42,9 +66,9 @@ export const stakingApyQuery = queryOptions({
 export const historicUsersQuery = queryOptions({
   ...circulatingSupplyHistoryQuery,
   select(points) {
-    const point = [...points].pop();
+    const [point] = points;
 
-    return point?.historicUsers
+    return point?.historicUsers !== undefined
       ? formatCompactNumber(point.historicUsers)
       : undefined;
   },
