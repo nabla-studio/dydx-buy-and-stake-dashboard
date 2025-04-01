@@ -39,7 +39,7 @@ export default function RootLayout({
               <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
             </Link>
 
-            <div className="flex items-center justify-between my-10">
+            <div className="flex items-center justify-between mt-5 mb-10">
               <p className="text-muted-foreground text-xs font-bold">
                 © {new Date().getFullYear()} dYdX Foundation. All rights
                 reserved.
