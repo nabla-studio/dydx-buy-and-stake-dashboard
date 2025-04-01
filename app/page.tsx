@@ -1,6 +1,5 @@
 import { AmountStakedCard } from "@/components/amount-staked-card";
 import { ApyCard } from "@/components/apy-card";
-import { CirculatingSupplySection } from "@/components/circulating-supply-section";
 import { GrowthChartCard } from "@/components/growth-chart-card";
 import { NextAmountCard } from "@/components/next-amount-card";
 import { PercentageFeesCard } from "@/components/percentage-fees-card";
@@ -55,7 +54,7 @@ export default function Home() {
       </div>
 
       <div className="grid gap-5 md:gap-8 md:grid-cols-3">
-        <CirculatingSupplySection className="md:col-span-full" />
+        {/* <CirculatingSupplySection className="md:col-span-full" /> */}
 
         <TotalDydxCard />
         <TotalUSDCard />

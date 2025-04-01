@@ -1,16 +1,62 @@
 "use client";
 
 import { dydxPriceQuery } from "@/queries/options";
+import { formatPercentageNumber } from "@/utils/number";
 import { useQuery } from "@tanstack/react-query";
-import { TrendingUp } from "lucide-react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
 import { GenericCard } from "./generic-card";
 
 const Footer = () => {
+  const { data } = useQuery({
+    ...dydxPriceQuery,
+    select(points) {
+      if (!points || points.length === 0) return undefined;
+
+      const point = [...points].pop();
+
+      if (!point) {
+        return {
+          value: undefined,
+          isPositive: true,
+        };
+      }
+
+      const yesterdayDate = new Date(point.labels);
+      yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+
+      const yesterdayPoint = points.find((p) => {
+        const pointDate = new Date(p.labels);
+
+        return pointDate.getTime() === yesterdayDate.getTime();
+      });
+
+      if (!yesterdayPoint) {
+        return {
+          value: undefined,
+          isPositive: true,
+        };
+      }
+
+      const priceDifference = point.priceDYDX - yesterdayPoint.priceDYDX;
+      const percentageChange = priceDifference / yesterdayPoint.priceDYDX;
+
+      return {
+        value: formatPercentageNumber(percentageChange),
+        isPositive: percentageChange >= 0,
+      };
+    },
+  });
+
   return (
     <>
       <div className="flex items-center gap-2 font-medium leading-none">
-        Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+        Trending {data?.isPositive ? "up" : "down"} by {data?.value} this day{" "}
+        {data?.isPositive ? (
+          <TrendingUp className="h-4 w-4" />
+        ) : (
+          <TrendingDown className="h-4 w-4" />
+        )}
       </div>
     </>
   );
