@@ -21,7 +21,7 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="DYDX Price (24h Change)"
+      title="DYDX Price"
       description="Live market price of DYDX."
       footer={<Footer />}
       {...rest}

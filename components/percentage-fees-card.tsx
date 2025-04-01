@@ -10,7 +10,7 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="% of Fees Allocated to Buybacks"
+      title="Fees Allocated to Buybacks"
       description="Share of protocol fees directed to the Buyback Program."
       {...rest}
     >

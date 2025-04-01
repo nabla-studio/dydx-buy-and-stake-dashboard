@@ -9,8 +9,8 @@ export function NextAmountCard({ ...rest }: ComponentProps<"div">) {
   const { data } = useQuery(nextBuybackAmountQuery);
   return (
     <GenericCard
-      title="Next Buyback Amount (DYDX)"
-      description="Real-time DYDX estimate based on USDC in Buyback wallet."
+      title="Next Buyback Amount"
+      description="Real-time estimate based on USDC in Buyback wallet."
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">

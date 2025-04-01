@@ -10,7 +10,7 @@ export function TotalStakedCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Total DYDX Staked"
+      title="Total Staked"
       description="Total DYDX currently staked across the entire network."
       {...rest}
     >

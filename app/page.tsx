@@ -20,8 +20,8 @@ export default function Home() {
       </h1>
 
       <div className="text-base text-muted-foreground mb-10">
-        The <strong className="text-foreground">dYdX Buyback Program</strong>{" "}
-        was launched by the{" "}
+        The <strong className="text-foreground">dYdX Buyback Program</strong>,
+        launched by the{" "}
         <a
           className="text-primary"
           href="https://www.google.com/url?q=https://dydx.forum/t/drc-dydx-treasury-subdao-dydx-buyback-program/3433&sa=D&source=docs&ust=1743515327000781&usg=AOvVaw2bZCqQaUDax5-xa41_5N4B"
@@ -29,37 +29,29 @@ export default function Home() {
           rel="noreferrer"
         >
           dYdX Treasury SubDAO
+        </a>
+        , leverages protocol revenue to purchase and stake DYDX tokens,
+        promoting sustainable token economics and long-term community alignment.
+        Activated through a series of on-chain proposals, including{" "}
+        <a
+          href="https://www.mintscan.io/dydx/proposals/225"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary"
+        >
+          Proposal #225
         </a>{" "}
-        to use protocol revenue for the purchase and staking of DYDX tokens.
-        <br />
-        The initiative aims to support sustainable token economics and long-term
-        alignment with the dYdX community. The program operates through a series
-        of on-chain proposals:
-        <ul className="list-disc pl-10 py-4">
-          <li>
-            <a
-              href="https://www.mintscan.io/dydx/proposals/225"
-              target="_blank"
-              rel="noreferrer"
-              className="text-primary"
-            >
-              Proposal #225 - Initial Buyback Activation
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.mintscan.io/dydx/proposals/231"
-              target="_blank"
-              rel="noreferrer"
-              className="text-primary"
-            >
-              Proposal #231 - dYdX Treasury SubDAO DYDX Buyback Program (Stage
-              2)
-            </a>
-          </li>
-        </ul>
-        This dashboard provides real-time insights into buybacks, staking, and
-        protocol revenue - empowering the community with transparent data.
+        (Initial Buyback Activation){" "}
+        <a
+          href="https://www.mintscan.io/dydx/proposals/231"
+          target="_blank"
+          rel="noreferrer"
+          className="text-primary"
+        >
+          Proposal #231
+        </a>{" "}
+        (Stage 2 of the Buyback Program), the initiative reflects a data-driven,
+        transparent approach to treasury management.
       </div>
 
       <div className="grid gap-5 md:gap-8 md:grid-cols-3">
@@ -70,7 +62,9 @@ export default function Home() {
         <NextAmountCard />
 
         <div className="col-span-full">
-          <p className="font-bold">Protocol data</p>
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Protocol data
+          </p>
         </div>
 
         <PurchasedChartCard />
@@ -78,7 +72,9 @@ export default function Home() {
         <PercentageFeesCard />
 
         <div className="col-span-full">
-          <p className="font-bold">Staking overview</p>
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Staking overview
+          </p>
         </div>
 
         <TotalStakedCard />
@@ -86,7 +82,9 @@ export default function Home() {
         <ApyCard />
 
         <div className="col-span-full">
-          <p className="font-bold">Network stats</p>
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Network stats
+          </p>
         </div>
 
         <PriceCard />

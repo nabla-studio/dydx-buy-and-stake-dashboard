@@ -10,7 +10,7 @@ export function ApyCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Estimated APY on Staked DYDX"
+      title="Estimated APY"
       description="Projected yearly return on staked DYDX."
       {...rest}
     >
