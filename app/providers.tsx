@@ -16,7 +16,7 @@ async function enableMocking() {
   return worker.start();
 }
 
-enableMocking();
+/* enableMocking(); */
 
 export const Providers = (props: PropsWithChildren) => {
   return (

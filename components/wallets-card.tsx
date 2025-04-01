@@ -1,3 +1,7 @@
+"use client";
+
+import { historicUsersQuery } from "@/queries/options";
+import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
 import { GenericCard } from "./generic-card";
@@ -16,6 +20,8 @@ const Footer = () => {
 };
 
 export function WalletsCard({ ...rest }: ComponentProps<"div">) {
+  const { data } = useQuery(historicUsersQuery);
+
   return (
     <GenericCard
       title="N° Wallet"
@@ -24,7 +30,7 @@ export function WalletsCard({ ...rest }: ComponentProps<"div">) {
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-4xl font-bold">9999</h3>
+        <h3 className="text-foreground text-4xl font-bold">{data}</h3>
       </div>
     </GenericCard>
   );
