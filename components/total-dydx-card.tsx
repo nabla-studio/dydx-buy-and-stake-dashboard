@@ -25,7 +25,7 @@ export function TotalDydxCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="Total DYDX Bought Back"
-      description="Cumulative amount of DYDX repurchased by the Buyback Program since inception."
+      description="Cumulative DYDX repurchased since program launch."
       footer={<Footer />}
       {...rest}
     >

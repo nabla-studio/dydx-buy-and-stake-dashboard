@@ -25,7 +25,7 @@ export function AmountStakedCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="DYDX Staked via Buyback Program"
-      description="Amount of DYDX staked specifically through the Treasury SubDAO buybacks."
+      description="DYDX staked through Treasury SubDAO buybacks."
       footer={<Footer />}
       {...rest}
     >

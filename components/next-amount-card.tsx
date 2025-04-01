@@ -19,7 +19,7 @@ export function NextAmountCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="Next Buyback Amount (DYDX)"
-      description="Estimated DYDX to be bought back, calculated in real-time based on USDC accrued in the Buyback wallet."
+      description="Real-time DYDX estimate based on USDC in Buyback wallet."
       footer={<Footer />}
       {...rest}
     >

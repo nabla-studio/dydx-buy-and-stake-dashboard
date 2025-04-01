@@ -11,7 +11,7 @@ export function ApyCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="Estimated APY on Staked DYDX"
-      description="Annualized return on staked DYDX, based on current network parameters."
+      description="Projected yearly return on staked DYDX."
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
