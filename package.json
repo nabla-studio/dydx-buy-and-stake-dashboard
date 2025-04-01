@@ -7,7 +7,8 @@
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "biome check",
-    "lint:fix": "biome check --write"
+    "lint:fix": "biome check --write",
+    "knip": "knip"
   },
   "dependencies": {
     "@radix-ui/react-select": "^2.1.6",
@@ -30,14 +31,15 @@
     "@biomejs/biome": "^1.9.4",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.17.29",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.2.4",
+    "knip": "^5.46.4",
     "msw": "^2.7.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5.8.2"
   },
   "msw": {
     "workerDirectory": [
