@@ -14,7 +14,7 @@ export function TotalFeesCard({ ...rest }: ComponentProps<"div">) {
     ...stakingSupplyHistoryQuery(startOfYear, today),
     select(data) {
       return formatCurrencyNumber(
-        data.map((el) => el.buybackFee).reduce((p, c) => p + c, 0),
+        data.map((el) => el.protocolRevenue).reduce((p, c) => p + c, 0),
       );
     },
   });
