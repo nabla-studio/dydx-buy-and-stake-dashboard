@@ -127,6 +127,17 @@ export const buybackFeeShareQuery = queryOptions({
   },
 });
 
+export const nextBuybackAmountQuery = queryOptions({
+  ...genericMetricsQuery(),
+  select(points) {
+    const point = [...points].pop();
+
+    return point?.priceDYDX !== undefined && point.liquidBalanceUSDC
+      ? formatCompactNumber(point.liquidBalanceUSDC / point.priceDYDX)
+      : undefined;
+  },
+});
+
 export const totalWalletsQuery = queryOptions({
   queryKey: ["total-wallets"],
   queryFn: getTotalWallets,
