@@ -5,7 +5,7 @@ import {
   stakingSupplyHistoryQuery,
 } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
-import { type ComponentProps, useMemo } from "react";
+import type { ComponentProps } from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import { ChartLoader } from "./chart-loader";
 import { Filters, useFilters } from "./filters";
@@ -25,7 +25,7 @@ const chartConfig = {
     label: "Protocol Revenue",
     color: "hsl(var(--chart-1))",
   },
-  dydxAcquired: {
+  buybackFee: {
     label: "Buyback",
     color: "hsl(var(--chart-2))",
   },
@@ -39,33 +39,8 @@ interface ChartProps {
 }
 
 const Chart = ({ filters }: ChartProps) => {
-  const { data: dataGenericMetrics } = useQuery(
-    genericMetricsQuery(filters.start, filters.end),
-  );
-  const { data: dataStakingSupply } = useQuery(
+  const { data } = useQuery(
     stakingSupplyHistoryQuery(filters.start, filters.end),
-  );
-
-  const data = useMemo(
-    () =>
-      dataGenericMetrics?.map((genericMetric) => {
-        const stakingSupply = dataStakingSupply?.find((data) => {
-          const dataDate = new Date(data.labels);
-          const metricDate = new Date(genericMetric.labels);
-          return (
-            dataDate.getFullYear() === metricDate.getFullYear() &&
-            dataDate.getMonth() === metricDate.getMonth() &&
-            dataDate.getDate() === metricDate.getDate()
-          );
-        });
-
-        return {
-          labels: genericMetric.labels,
-          dydxAcquired: genericMetric.dydxAcquired,
-          protocolRevenue: stakingSupply?.protocolRevenue ?? 0,
-        };
-      }) ?? [],
-    [dataGenericMetrics, dataStakingSupply],
   );
 
   return (
@@ -119,9 +94,9 @@ const Chart = ({ filters }: ChartProps) => {
           isAnimationActive={false}
         />
         <Line
-          dataKey="dydxAcquired"
+          dataKey="buybackFee"
           type="monotone"
-          stroke="var(--color-dydxAcquired)"
+          stroke="var(--color-buybackFee)"
           strokeWidth={2}
           dot={false}
           isAnimationActive={false}

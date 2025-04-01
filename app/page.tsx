@@ -18,7 +18,7 @@ export default function Home() {
         Dashboard
       </h1>
 
-      <div className="text-base text-muted-foreground mb-10">
+      <div className="text-base text-muted-foreground mb-20">
         The <strong className="text-foreground">dYdX Buyback Program</strong>,
         launched by the{" "}
         <a
