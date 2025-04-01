@@ -39,13 +39,22 @@ export const genericMetricsQuery = queryOptions({
   queryFn: getGenericMetrics,
 });
 
-export const circulatingSupplyQuery = queryOptions({
-  ...circulatingSupplyHistoryQuery,
+export const totalDydxBoughtBackQuery = queryOptions({
+  ...genericMetricsQuery,
   select(points) {
-    const point = points["0"];
+    const [point] = points;
+
+    return point ? formatCompactNumber(point.dydxAcquired) : undefined;
+  },
+});
+
+export const totalUsdBoughtBackQuery = queryOptions({
+  ...genericMetricsQuery,
+  select(points) {
+    const [point] = points;
 
     return point
-      ? formatCompactNumber(point.average_circulationsupply)
+      ? formatCurrencyNumber(point.dydxAcquired * point.priceDYDX)
       : undefined;
   },
 });

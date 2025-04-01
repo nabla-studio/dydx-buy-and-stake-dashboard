@@ -1,13 +1,9 @@
 "use client";
 
-import {
-  circulatingSupplyHistoryQuery,
-  genericMetricsQuery,
-} from "@/queries/options";
-import { formatCurrencyNumber } from "@/utils/number";
+import { totalUsdBoughtBackQuery } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
-import { type ComponentProps, useMemo } from "react";
+import type { ComponentProps } from "react";
 import { GenericCard } from "./generic-card";
 
 const Footer = () => {
@@ -24,23 +20,7 @@ const Footer = () => {
 };
 
 export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
-  const { data: circulatingSupplyHistory } = useQuery(
-    circulatingSupplyHistoryQuery,
-  );
-  const { data: genericMetrics } = useQuery(genericMetricsQuery);
-
-  const total = useMemo(() => {
-    const circulatingSupplyPoint = circulatingSupplyHistory?.["0"];
-
-    if (circulatingSupplyPoint && genericMetrics) {
-      const [genericMetricPoint] = genericMetrics;
-
-      return formatCurrencyNumber(
-        genericMetricPoint.priceDYDX *
-          Number.parseFloat(circulatingSupplyPoint.average_circulationsupply),
-      );
-    }
-  }, [circulatingSupplyHistory, genericMetrics]);
+  const { data } = useQuery(totalUsdBoughtBackQuery);
 
   return (
     <GenericCard
@@ -50,7 +30,7 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-4xl font-bold">{total}</h3>
+        <h3 className="text-foreground text-4xl font-bold">{data}</h3>
         <p className="text-muted-foreground text-xs">USD</p>
       </div>
     </GenericCard>

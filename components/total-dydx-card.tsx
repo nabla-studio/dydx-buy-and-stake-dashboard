@@ -1,6 +1,6 @@
 "use client";
 
-import { circulatingSupplyQuery } from "@/queries/options";
+import { totalDydxBoughtBackQuery } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
 import type { ComponentProps } from "react";
@@ -20,7 +20,7 @@ const Footer = () => {
 };
 
 export function TotalDydxCard({ ...rest }: ComponentProps<"div">) {
-  const { data } = useQuery(circulatingSupplyQuery);
+  const { data } = useQuery(totalDydxBoughtBackQuery);
 
   return (
     <GenericCard
