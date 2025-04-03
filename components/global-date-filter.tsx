@@ -68,6 +68,20 @@ export function DatePickerWithRange({
             }}
             numberOfMonths={2}
           />
+
+          <div className="p-4 flex justify-end pt-0">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setDate({
+                  from: dateFilterParsers.from.defaultValue,
+                  to: dateFilterParsers.to.defaultValue,
+                });
+              }}
+            >
+              Reset
+            </Button>
+          </div>
         </PopoverContent>
       </Popover>
     </div>
