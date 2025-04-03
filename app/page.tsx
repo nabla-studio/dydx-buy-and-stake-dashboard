@@ -1,5 +1,6 @@
 import { AmountStakedCard } from "@/components/amount-staked-card";
 import { ApyCard } from "@/components/apy-card";
+import { DatePickerWithRange } from "@/components/global-date-filter";
 import { GrowthChartCard } from "@/components/growth-chart-card";
 import { NextAmountCard } from "@/components/next-amount-card";
 import { PercentageFeesCard } from "@/components/percentage-fees-card";
@@ -14,9 +15,13 @@ import { WalletsCard } from "@/components/wallets-card";
 export default function Home() {
   return (
     <section className="pt-24">
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-8">
-        Dashboard
-      </h1>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Dashboard
+        </h1>
+
+        <DatePickerWithRange />
+      </div>
 
       <div className="text-base text-muted-foreground mb-20">
         The <strong className="text-foreground">dYdX Buyback Program</strong>,

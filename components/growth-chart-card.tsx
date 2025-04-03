@@ -1,7 +1,9 @@
 "use client";
 
 import { stakingSupplyHistoryQuery } from "@/queries/options";
+import { dateFilterParsers } from "@/state/date-filter";
 import { useQuery } from "@tanstack/react-query";
+import { useQueryStates } from "nuqs";
 import { type ComponentProps, useMemo } from "react";
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
 import { ChartLoader } from "./chart-loader";
@@ -24,7 +26,8 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const Chart = () => {
-  const { data } = useQuery(stakingSupplyHistoryQuery());
+  const [dates] = useQueryStates(dateFilterParsers);
+  const { data } = useQuery(stakingSupplyHistoryQuery(dates.from, dates.to));
 
   const minMax = useMemo(() => {
     if (!data?.length) return undefined;
@@ -34,6 +37,10 @@ const Chart = () => {
 
     return [min, max];
   }, [data]);
+
+  if (!data || data.length === 0) {
+    return <h3 className="text-foreground text-7xl font-bold">{"N/A"}</h3>;
+  }
 
   return (
     <ChartContainer
@@ -94,7 +101,10 @@ const Chart = () => {
 };
 
 export function GrowthChartCard({ ...rest }: ComponentProps<"div">) {
-  const { isLoading } = useQuery(stakingSupplyHistoryQuery());
+  const [dates] = useQueryStates(dateFilterParsers);
+  const { isLoading } = useQuery(
+    stakingSupplyHistoryQuery(dates.from, dates.to),
+  );
 
   return (
     <GenericCard

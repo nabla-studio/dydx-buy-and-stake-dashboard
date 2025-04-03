@@ -4,6 +4,7 @@ import {
   getStakingSupplyHistory,
   getTotalWallets,
 } from "@/services/numia";
+import { thirtyDaysAgo, today } from "@/state/date-filter";
 import {
   formatCompactNumber,
   formatCurrencyNumber,
@@ -16,18 +17,11 @@ export const circulatingSupplyHistoryQuery = queryOptions({
   queryFn: getCirculatingSupplyHistory,
 });
 
-const today = new Date();
-const thirtyDaysAgo = new Date();
-thirtyDaysAgo.setDate(today.getDate() - 30);
-
 const formatDate = (date: Date) => {
   return date.toISOString().split("T")[0]; // YYYY-MM-DD format
 };
 
-export const stakingSupplyHistoryQuery = (
-  startDate = thirtyDaysAgo,
-  endDate = today,
-) =>
+export const stakingSupplyHistoryQuery = (startDate: Date, endDate: Date) =>
   queryOptions({
     queryKey: ["staking-supply-history", startDate, endDate],
     queryFn: () => {
@@ -38,12 +32,9 @@ export const stakingSupplyHistoryQuery = (
     },
   });
 
-export const genericMetricsQuery = (
-  startDate = thirtyDaysAgo,
-  endDate = today,
-) =>
+export const genericMetricsQuery = (startDate: Date, endDate: Date) =>
   queryOptions({
-    queryKey: ["generic-metrics"],
+    queryKey: ["generic-metrics", startDate, endDate],
     queryFn: () => {
       return getGenericMetrics({
         start_date: formatDate(startDate),
@@ -53,7 +44,7 @@ export const genericMetricsQuery = (
   });
 
 export const totalDydxBoughtBackQuery = queryOptions({
-  ...genericMetricsQuery(),
+  ...genericMetricsQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
@@ -62,7 +53,7 @@ export const totalDydxBoughtBackQuery = queryOptions({
 });
 
 export const totalUsdBoughtBackQuery = queryOptions({
-  ...genericMetricsQuery(),
+  ...genericMetricsQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
@@ -72,19 +63,28 @@ export const totalUsdBoughtBackQuery = queryOptions({
   },
 });
 
-export const dydxPriceQuery = queryOptions({
-  ...genericMetricsQuery(),
-  select(points) {
-    const point = [...points].pop();
+export const dydxPriceQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...genericMetricsQuery(startDate, endDate),
+    select(points) {
+      const [firstPoint] = points;
+      const lastPpoint = [...points].pop();
 
-    return point?.priceDYDX !== undefined
-      ? formatCurrencyNumber(point.priceDYDX)
-      : undefined;
-  },
-});
+      return {
+        first:
+          firstPoint?.priceDYDX !== undefined
+            ? formatCurrencyNumber(firstPoint.priceDYDX)
+            : undefined,
+        last:
+          lastPpoint?.priceDYDX !== undefined
+            ? formatCurrencyNumber(lastPpoint.priceDYDX)
+            : undefined,
+      };
+    },
+  });
 
 export const stakingSupplyQuery = queryOptions({
-  ...stakingSupplyHistoryQuery(),
+  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
@@ -94,19 +94,28 @@ export const stakingSupplyQuery = queryOptions({
   },
 });
 
-export const stakingBalanceQuery = queryOptions({
-  ...genericMetricsQuery(),
-  select(points) {
-    const point = [...points].pop();
+export const stakingBalanceQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...genericMetricsQuery(startDate, endDate),
+    select(points) {
+      const [firstPoint] = points;
+      const lastPoint = [...points].pop();
 
-    return point?.stakingBalance !== undefined
-      ? formatCompactNumber(point.stakingBalance)
-      : undefined;
-  },
-});
+      return {
+        first:
+          firstPoint?.stakingBalance !== undefined
+            ? formatCompactNumber(firstPoint.stakingBalance)
+            : undefined,
+        last:
+          lastPoint?.stakingBalance !== undefined
+            ? formatCompactNumber(lastPoint.stakingBalance)
+            : undefined,
+      };
+    },
+  });
 
 export const stakingApyQuery = queryOptions({
-  ...stakingSupplyHistoryQuery(),
+  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
@@ -117,7 +126,7 @@ export const stakingApyQuery = queryOptions({
 });
 
 export const buybackFeeShareQuery = queryOptions({
-  ...stakingSupplyHistoryQuery(),
+  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
@@ -128,7 +137,7 @@ export const buybackFeeShareQuery = queryOptions({
 });
 
 export const nextBuybackAmountQuery = queryOptions({
-  ...genericMetricsQuery(),
+  ...genericMetricsQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
