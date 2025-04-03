@@ -27,6 +27,10 @@ export function DatePickerWithRange({
     };
   }, [date]);
 
+  const notDefaultValue =
+    dateFilterParsers.from.defaultValue.getTime() !== date.from.getTime() &&
+    dateFilterParsers.to.defaultValue.getTime() !== date.to.getTime();
+
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -40,7 +44,7 @@ export function DatePickerWithRange({
             )}
           >
             <CalendarIcon />
-            {date?.from ? (
+            {notDefaultValue && date?.from ? (
               date.to ? (
                 <>
                   {format(date.from, "LLL dd, y")} -{" "}
@@ -50,7 +54,7 @@ export function DatePickerWithRange({
                 format(date.from, "LLL dd, y")
               )
             ) : (
-              <span>Pick a date</span>
+              <span>Pick a date range</span>
             )}
           </Button>
         </PopoverTrigger>
