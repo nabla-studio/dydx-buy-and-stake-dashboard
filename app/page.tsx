@@ -65,9 +65,36 @@ export default function Home() {
         <TotalUSDCard />
         <NextAmountCard />
 
-        <div className="col-span-full">
-          <p className="font-bold uppercase text-xs text-muted-foreground">
+        <div className="col-span-full pt-2.5">
+          <p className="font-bold uppercase text-xs text-muted-foreground mb-5">
             Protocol data
+          </p>
+
+          <p className="text-sm text-muted-foreground">
+            This dashboard shows real-time data on DYDX buybacks like revenue,
+            staking, and fee allocation — offering transparent insight into
+            value returned to the ecosystem.
+            <br />
+            dYdX is a community-governed, proof-of-stake blockchain (Cosmos SDK)
+            for perpetuals, supported by subDAOs managing development and
+            sustainable initiatives like the buyback program.{" "}
+            <a
+              href="https://docs.dydx.community"
+              className="text-sm text-primary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View the docs
+            </a>{" "}
+            |{" "}
+            <a
+              href="https://dydx.forum"
+              target="_blank"
+              className="text-sm text-primary"
+              rel="noreferrer"
+            >
+              Go to Forum
+            </a>
           </p>
         </div>
 
@@ -75,7 +102,7 @@ export default function Home() {
         <TotalFeesCard />
         <PercentageFeesCard />
 
-        <div className="col-span-full">
+        <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground">
             Staking overview
           </p>
@@ -85,7 +112,7 @@ export default function Home() {
         <AmountStakedCard />
         <ApyCard />
 
-        <div className="col-span-full">
+        <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground">
             Network stats
           </p>
