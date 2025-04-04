@@ -71,6 +71,10 @@ export function DatePickerWithRange({
               });
             }}
             numberOfMonths={2}
+            disabled={{
+              before: new Date("03/11/2025"),
+              after: new Date(),
+            }}
           />
 
           <div className="p-4 flex justify-end pt-0">
