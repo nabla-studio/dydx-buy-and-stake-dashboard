@@ -72,8 +72,8 @@ export default function Home() {
 
           <p className="text-sm text-muted-foreground">
             This dashboard shows real-time data on DYDX buybacks like revenue,
-            staking, and fee allocation — offering transparent insight into
-            value returned to the ecosystem.
+            staking, and fee allocation, offering transparent insight into value
+            returned to the ecosystem.
             <br />
             dYdX is a community-governed, proof-of-stake blockchain (Cosmos SDK)
             for perpetuals, supported by subDAOs managing development and
