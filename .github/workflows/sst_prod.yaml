@@ -1,5 +1,5 @@
-# Workflow name: "sst deploy"
-name: sst deploy
+# Workflow name: "sst prod deploy"
+name: sst prod deploy
 
 # Trigger configuration:
 # - push: automatically triggers the workflow when a push is made to the "prod" branch.
@@ -56,6 +56,7 @@ jobs:
         env:
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
           DOMAIN_CERT_ARN: ${{ secrets.DOMAIN_CERT_ARN }}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL}}
 
         run: |
           bunx sst deploy --stage=prod
