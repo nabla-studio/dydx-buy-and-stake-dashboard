@@ -6,6 +6,10 @@ export const formatCompactNumber = (number: number | `${number}`) => {
 };
 
 export const formatCurrencyNumber = (number: number | `${number}`) => {
+  if (!number || number === "0") {
+    return "0";
+  }
+
   return new Intl.NumberFormat("en", {
     notation: "compact",
     minimumFractionDigits: 2,
