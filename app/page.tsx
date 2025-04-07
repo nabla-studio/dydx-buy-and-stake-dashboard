@@ -142,7 +142,9 @@ export default function Home() {
         <Suspense>
           <PriceCard />
         </Suspense>
-        <WalletsCard />
+        <Suspense>
+          <WalletsCard />
+        </Suspense>
         <Suspense>
           <GrowthChartCard />
         </Suspense>
