@@ -43,25 +43,27 @@ export const genericMetricsQuery = (startDate: Date, endDate: Date) =>
     },
   });
 
-export const totalDydxBoughtBackQuery = queryOptions({
-  ...genericMetricsQuery(thirtyDaysAgo, today),
-  select(points) {
-    const point = [...points].pop();
+export const totalDydxBoughtBackQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...genericMetricsQuery(startDate, endDate),
+    select(points) {
+      const point = [...points].pop();
 
-    return point ? formatCompactNumber(point.dydxAcquired) : undefined;
-  },
-});
+      return point ? formatCompactNumber(point.dydxAcquired) : undefined;
+    },
+  });
 
-export const totalUsdBoughtBackQuery = queryOptions({
-  ...genericMetricsQuery(thirtyDaysAgo, today),
-  select(points) {
-    const point = [...points].pop();
+export const totalUsdBoughtBackQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...genericMetricsQuery(startDate, endDate),
+    select(points) {
+      const point = [...points].pop();
 
-    return point
-      ? formatCurrencyNumber(point.dydxAcquired * point.priceDYDX)
-      : undefined;
-  },
-});
+      return point
+        ? formatCurrencyNumber(point.dydxAcquired * point.priceDYDX)
+        : undefined;
+    },
+  });
 
 export const dydxPriceQuery = (startDate: Date, endDate: Date) =>
   queryOptions({
@@ -83,16 +85,17 @@ export const dydxPriceQuery = (startDate: Date, endDate: Date) =>
     },
   });
 
-export const stakingSupplyQuery = queryOptions({
-  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
-  select(points) {
-    const point = [...points].pop();
+export const stakingSupplyQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...stakingSupplyHistoryQuery(startDate, endDate),
+    select(points) {
+      const point = [...points].pop();
 
-    return point?.stakingSupply !== undefined
-      ? formatCompactNumber(point.stakingSupply)
-      : undefined;
-  },
-});
+      return point?.stakingSupply !== undefined
+        ? formatCompactNumber(point.stakingSupply)
+        : undefined;
+    },
+  });
 
 export const stakingBalanceQuery = (startDate: Date, endDate: Date) =>
   queryOptions({
@@ -114,27 +117,45 @@ export const stakingBalanceQuery = (startDate: Date, endDate: Date) =>
     },
   });
 
-export const stakingApyQuery = queryOptions({
-  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
-  select(points) {
-    const point = [...points].pop();
+export const stakingApyQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...stakingSupplyHistoryQuery(startDate, endDate),
+    select(points) {
+      const [firstPoint] = points;
+      const lastPoint = [...points].pop();
 
-    return point?.stakingApr !== undefined
-      ? formatPercentageNumber((point.stakingApr / 100) * 12)
-      : undefined;
-  },
-});
+      return {
+        first:
+          firstPoint?.stakingApr !== undefined
+            ? formatPercentageNumber((firstPoint.stakingApr / 100) * 12)
+            : undefined,
+        last:
+          lastPoint?.stakingApr !== undefined
+            ? formatPercentageNumber((lastPoint.stakingApr / 100) * 12)
+            : undefined,
+      };
+    },
+  });
 
-export const buybackFeeShareQuery = queryOptions({
-  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
-  select(points) {
-    const point = [...points].pop();
+export const buybackFeeShareQuery = (startDate: Date, endDate: Date) =>
+  queryOptions({
+    ...stakingSupplyHistoryQuery(startDate, endDate),
+    select(points) {
+      const [firstPoint] = points;
+      const lastPoint = [...points].pop();
 
-    return point?.buybackFeeShare !== undefined
-      ? formatPercentageNumber(point.buybackFeeShare)
-      : undefined;
-  },
-});
+      return {
+        first:
+          firstPoint?.buybackFeeShare !== undefined
+            ? formatPercentageNumber(firstPoint.buybackFeeShare)
+            : undefined,
+        last:
+          lastPoint?.buybackFeeShare !== undefined
+            ? formatPercentageNumber(lastPoint.buybackFeeShare)
+            : undefined,
+      };
+    },
+  });
 
 export const nextBuybackAmountQuery = queryOptions({
   ...genericMetricsQuery(thirtyDaysAgo, today),

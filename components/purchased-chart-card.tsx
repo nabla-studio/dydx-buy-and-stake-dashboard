@@ -1,5 +1,6 @@
 "use client";
 
+import { useDateFilter } from "@/hooks/date-filter";
 import {
   genericMetricsQuery,
   stakingSupplyHistoryQuery,
@@ -8,7 +9,6 @@ import { useQuery } from "@tanstack/react-query";
 import type { ComponentProps } from "react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import { ChartLoader } from "./chart-loader";
-import { Filters, useFilters } from "./filters";
 import { GenericCard } from "./generic-card";
 import {
   type ChartConfig,
@@ -31,17 +31,9 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-interface ChartProps {
-  filters: {
-    start: Date;
-    end: Date;
-  };
-}
-
-const Chart = ({ filters }: ChartProps) => {
-  const { data } = useQuery(
-    stakingSupplyHistoryQuery(filters.start, filters.end),
-  );
+const Chart = () => {
+  const { dates } = useDateFilter();
+  const { data } = useQuery(stakingSupplyHistoryQuery(dates.from, dates.to));
 
   return (
     <ChartContainer
@@ -107,13 +99,13 @@ const Chart = ({ filters }: ChartProps) => {
 };
 
 export function PurchasedChartCard({ ...rest }: ComponentProps<"div">) {
-  const { filter, filters, setFilter } = useFilters();
+  const { dates } = useDateFilter();
 
   const { isLoading: isLoadingGenericMetrics } = useQuery(
-    genericMetricsQuery(filters.start, filters.end),
+    genericMetricsQuery(dates.from, dates.to),
   );
   const { isLoading: isLoadingStakingSupplyHistory } = useQuery(
-    stakingSupplyHistoryQuery(filters.start, filters.end),
+    stakingSupplyHistoryQuery(dates.from, dates.to),
   );
 
   const isLoading = isLoadingGenericMetrics || isLoadingStakingSupplyHistory;
@@ -122,12 +114,11 @@ export function PurchasedChartCard({ ...rest }: ComponentProps<"div">) {
     <GenericCard
       title="Protocol Revenue vs Buybacks"
       description="Comparison of protocol revenue and buyback allocations."
-      actions={<Filters value={filter} onValueChange={setFilter} />}
       className="relative"
       {...rest}
     >
       {isLoading ? <ChartLoader /> : null}
-      <Chart filters={filters} />
+      <Chart />
     </GenericCard>
   );
 }

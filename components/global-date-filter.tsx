@@ -11,25 +11,21 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useDateFilter } from "@/hooks/date-filter";
 import { cn } from "@/lib/utils";
 import { dateFilterParsers } from "@/state/date-filter";
-import { useQueryStates } from "nuqs";
 
 export function DatePickerWithRange({
   className,
 }: HTMLAttributes<HTMLDivElement>) {
-  const [date, setDate] = useQueryStates(dateFilterParsers);
+  const { dates, notDefaultValue, setDate } = useDateFilter();
 
   const selectedDate = useMemo(() => {
     return {
-      from: date.from ?? undefined,
-      to: date.to ?? undefined,
+      from: dates.from ?? undefined,
+      to: dates.to ?? undefined,
     };
-  }, [date]);
-
-  const notDefaultValue =
-    dateFilterParsers.from.defaultValue.getTime() !== date.from.getTime() &&
-    dateFilterParsers.to.defaultValue.getTime() !== date.to.getTime();
+  }, [dates]);
 
   return (
     <div className={cn("grid gap-2", className)}>
@@ -40,18 +36,18 @@ export function DatePickerWithRange({
             variant={"outline"}
             className={cn(
               "w-[300px] justify-start text-left font-normal",
-              !date && "text-muted-foreground",
+              !dates && "text-muted-foreground",
             )}
           >
             <CalendarIcon />
-            {notDefaultValue && date?.from ? (
-              date.to ? (
+            {notDefaultValue && dates?.from ? (
+              dates.to ? (
                 <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
+                  {format(dates.from, "LLL dd, y")} -{" "}
+                  {format(dates.to, "LLL dd, y")}
                 </>
               ) : (
-                format(date.from, "LLL dd, y")
+                format(dates.from, "LLL dd, y")
               )
             ) : (
               <span>Pick a date range</span>
@@ -62,7 +58,7 @@ export function DatePickerWithRange({
           <Calendar
             initialFocus
             mode="range"
-            defaultMonth={date?.from ?? undefined}
+            defaultMonth={dates?.from ?? undefined}
             selected={selectedDate}
             onSelect={(value) => {
               setDate({

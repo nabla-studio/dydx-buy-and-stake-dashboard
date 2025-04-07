@@ -1,16 +1,16 @@
 "use client";
 
+import { useDateFilter } from "@/hooks/date-filter";
 import { dydxPriceQuery } from "@/queries/options";
-import { dateFilterParsers } from "@/state/date-filter";
+import { formatShortDate } from "@/utils/date";
 import { formatPercentageNumber } from "@/utils/number";
 import { useQuery } from "@tanstack/react-query";
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { useQueryStates } from "nuqs";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useMemo } from "react";
 import { GenericCard } from "./generic-card";
 
 const Footer = () => {
-  const [dates] = useQueryStates(dateFilterParsers);
+  const { dates } = useDateFilter();
 
   const { data } = useQuery({
     ...dydxPriceQuery(dates.from, dates.to),
@@ -71,27 +71,37 @@ const Footer = () => {
 };
 
 export function PriceCard({ ...rest }: ComponentProps<"div">) {
-  const [dates] = useQueryStates(dateFilterParsers);
+  const { dates, notDefaultValue } = useDateFilter();
   const { data } = useQuery(dydxPriceQuery(dates.from, dates.to));
 
-  const notDefaultValue =
-    dateFilterParsers.from.defaultValue.getTime() !== dates.from.getTime() &&
-    dateFilterParsers.to.defaultValue.getTime() !== dates.to.getTime();
+  const description = useMemo(() => {
+    if (notDefaultValue) {
+      return `Market price of DYDX from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}`;
+    }
+
+    return "Live market price of DYDX.";
+  }, [notDefaultValue, dates]);
 
   return (
     <GenericCard
       title="DYDX Price"
-      description="Live market price of DYDX."
+      description={description}
       footer={<Footer />}
       {...rest}
     >
       <div className="flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">
-          {!data?.first && !data?.last
-            ? "N/A"
-            : notDefaultValue
-              ? `${data.first} - ${data.last}`
-              : data.last}
+          {!data?.first && !data?.last ? (
+            "N/A"
+          ) : notDefaultValue ? (
+            <span className="flex flex-col items-center">
+              {data.first}
+              <span>-</span>
+              {data.last}
+            </span>
+          ) : (
+            data.last
+          )}
         </h3>
         <p className="text-primary text-sm">USD</p>
       </div>

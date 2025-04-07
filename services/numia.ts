@@ -55,9 +55,7 @@ interface GetTotalWalletsResponse {
 
 export const getTotalWallets = () =>
   apiClient
-    .get<GetTotalWalletsResponse>("cosmos/bank/v1beta1/denom_owners/adydx", {
-      prefixUrl: "https://dydx-lcd.numia.xyz",
-    })
+    .get<GetTotalWalletsResponse>("cosmos/bank/v1beta1/denom_owners/adydx")
     .json();
 
 interface GetGenericMetricsResponse {
