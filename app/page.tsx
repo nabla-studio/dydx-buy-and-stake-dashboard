@@ -11,6 +11,7 @@ import { TotalFeesCard } from "@/components/total-fees-card";
 import { TotalStakedCard } from "@/components/total-staked-card";
 import { TotalUSDCard } from "@/components/total-usd-card";
 import { WalletsCard } from "@/components/wallets-card";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -20,7 +21,9 @@ export default function Home() {
           Dashboard
         </h1>
 
-        <DatePickerWithRange />
+        <Suspense>
+          <DatePickerWithRange />
+        </Suspense>
       </div>
 
       <div className="text-base text-muted-foreground mb-20">
@@ -61,9 +64,15 @@ export default function Home() {
       <div className="grid gap-5 md:gap-8 md:grid-cols-3">
         {/* <CirculatingSupplySection className="md:col-span-full" /> */}
 
-        <TotalDydxCard />
-        <TotalUSDCard />
-        <NextAmountCard />
+        <Suspense>
+          <TotalDydxCard />
+        </Suspense>
+        <Suspense>
+          <TotalUSDCard />
+        </Suspense>
+        <Suspense>
+          <NextAmountCard />
+        </Suspense>
 
         <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground mb-5">
@@ -98,9 +107,15 @@ export default function Home() {
           </p>
         </div>
 
-        <PurchasedChartCard />
-        <TotalFeesCard />
-        <PercentageFeesCard />
+        <Suspense>
+          <PurchasedChartCard />
+        </Suspense>
+        <Suspense>
+          <TotalFeesCard />
+        </Suspense>
+        <Suspense>
+          <PercentageFeesCard />
+        </Suspense>
 
         <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground">
@@ -108,9 +123,15 @@ export default function Home() {
           </p>
         </div>
 
-        <TotalStakedCard />
-        <AmountStakedCard />
-        <ApyCard />
+        <Suspense>
+          <TotalStakedCard />
+        </Suspense>
+        <Suspense>
+          <AmountStakedCard />
+        </Suspense>
+        <Suspense>
+          <ApyCard />
+        </Suspense>
 
         <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground">
@@ -118,9 +139,13 @@ export default function Home() {
           </p>
         </div>
 
-        <PriceCard />
+        <Suspense>
+          <PriceCard />
+        </Suspense>
         <WalletsCard />
-        <GrowthChartCard />
+        <Suspense>
+          <GrowthChartCard />
+        </Suspense>
       </div>
     </section>
   );

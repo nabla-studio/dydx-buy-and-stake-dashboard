@@ -22,7 +22,7 @@ export function NextAmountCard({ ...rest }: ComponentProps<"div">) {
 
         {notDefaultValue ? (
           <div className="absolute inset-0 bg-background text-base flex items-center justify-center text-primary font-bold">
-            We can’t calculate
+            We can’t calculate for the selected range
           </div>
         ) : null}
       </div>
