@@ -13,7 +13,7 @@ export function TotalDydxCard({ ...rest }: ComponentProps<"div">) {
 
   const description = useMemo(() => {
     if (notDefaultValue) {
-      return `Cumulative DYDX repurchased from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}`;
+      return `Cumulative DYDX repurchased from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
     }
 
     return "Cumulative DYDX repurchased since program launch.";

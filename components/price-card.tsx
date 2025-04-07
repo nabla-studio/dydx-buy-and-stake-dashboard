@@ -10,7 +10,7 @@ import { type ComponentProps, useMemo } from "react";
 import { GenericCard } from "./generic-card";
 
 const Footer = () => {
-  const { dates } = useDateFilter();
+  const { dates, notDefaultValue } = useDateFilter();
 
   const { data } = useQuery({
     ...dydxPriceQuery(dates.from, dates.to),
@@ -59,7 +59,8 @@ const Footer = () => {
   return (
     <>
       <div className="flex items-center gap-2 font-medium leading-none">
-        Trending {data?.isPositive ? "up" : "down"} by {data?.value} this day{" "}
+        Trending {data?.isPositive ? "up" : "down"} by {data?.value}{" "}
+        {notDefaultValue ? "in this interval" : "today"}{" "}
         {data?.isPositive ? (
           <TrendingUp className="h-4 w-4" />
         ) : (
@@ -76,7 +77,7 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
 
   const description = useMemo(() => {
     if (notDefaultValue) {
-      return `Market price of DYDX from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}`;
+      return `Market price of DYDX from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
     }
 
     return "Live market price of DYDX.";
