@@ -17,9 +17,12 @@ interface GetStakingSupplyHistoryResponse {
 
 export const getStakingSupplyHistory = (payload: Filters) =>
   apiClient
-    .get<GetStakingSupplyHistoryResponse[]>("dydx/tokenomics/staking_supply", {
-      searchParams: payload,
-    })
+    .get<GetStakingSupplyHistoryResponse[]>(
+      "dydx/dydx/tokenomics/staking_supply",
+      {
+        searchParams: payload,
+      },
+    )
     .json()
     .then((data) => data.reverse());
 
@@ -55,7 +58,9 @@ interface GetTotalWalletsResponse {
 
 export const getTotalWallets = () =>
   apiClient
-    .get<GetTotalWalletsResponse>("cosmos/bank/v1beta1/denom_owners/adydx")
+    .get<GetTotalWalletsResponse>(
+      "dydx-lcd/cosmos/bank/v1beta1/denom_owners/adydx",
+    )
     .json();
 
 interface GetGenericMetricsResponse {
@@ -74,7 +79,7 @@ interface GetGenericMetricsResponse {
 export const getGenericMetrics = (filters: Filters) =>
   apiClient
     .get<GetGenericMetricsResponse[]>(
-      "dydx/tokenomics/buystake_address_metrics",
+      "dydx/dydx/tokenomics/buystake_address_metrics",
       {
         searchParams: filters,
       },
