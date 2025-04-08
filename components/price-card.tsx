@@ -73,7 +73,7 @@ const Footer = () => {
 
 export function PriceCard({ ...rest }: ComponentProps<"div">) {
   const { dates, notDefaultValue } = useDateFilter();
-  const { data } = useQuery(dydxPriceQuery(dates.from, dates.to));
+  const { data, isError } = useQuery(dydxPriceQuery(dates.from, dates.to));
 
   const description = useMemo(() => {
     if (notDefaultValue) {
@@ -90,7 +90,7 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
       footer={<Footer />}
       {...rest}
     >
-      <div className="flex flex-col items-center gap-1">
+      <div className="relative w-full flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">
           {!data?.first && !data?.last ? (
             "N/A"
@@ -105,6 +105,12 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
           )}
         </h3>
         <p className="text-primary text-sm">USD</p>
+
+        {isError ? (
+          <div className="absolute inset-0 bg-background text-base flex items-center justify-center text-primary font-bold text-center">
+            Something went wrong
+          </div>
+        ) : null}
       </div>
     </GenericCard>
   );

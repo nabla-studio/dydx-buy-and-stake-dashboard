@@ -9,7 +9,7 @@ import { GenericCard } from "./generic-card";
 
 export function AmountStakedCard({ ...rest }: ComponentProps<"div">) {
   const { dates, notDefaultValue } = useDateFilter();
-  const { data } = useQuery(stakingBalanceQuery(dates.from, dates.to));
+  const { data, isError } = useQuery(stakingBalanceQuery(dates.from, dates.to));
 
   const description = useMemo(() => {
     if (notDefaultValue) {
@@ -25,11 +25,17 @@ export function AmountStakedCard({ ...rest }: ComponentProps<"div">) {
       description={description}
       {...rest}
     >
-      <div className="flex flex-col items-center gap-1">
+      <div className="relative w-full flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">
           {!data?.last ? "N/A" : data.last}
         </h3>
         <p className="text-primary text-sm">DYDX</p>
+
+        {isError ? (
+          <div className="absolute inset-0 bg-background text-base flex items-center justify-center text-primary font-bold text-center">
+            Something went wrong
+          </div>
+        ) : null}
       </div>
     </GenericCard>
   );

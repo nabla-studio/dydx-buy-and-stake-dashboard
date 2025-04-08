@@ -8,7 +8,9 @@ import { GenericCard } from "./generic-card";
 
 export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
   const { dates, notDefaultValue } = useDateFilter();
-  const { data } = useQuery(buybackFeeShareQuery(dates.from, dates.to));
+  const { data, isError } = useQuery(
+    buybackFeeShareQuery(dates.from, dates.to),
+  );
 
   return (
     <GenericCard
@@ -16,7 +18,7 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
       description="Share of protocol fees directed to the Buyback Program."
       {...rest}
     >
-      <div className="flex flex-col items-center gap-1">
+      <div className="relative w-full flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">
           {!data?.first && !data?.last ? (
             "N/A"
@@ -34,6 +36,12 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
             data.last
           )}
         </h3>
+
+        {isError ? (
+          <div className="absolute inset-0 bg-background text-base flex items-center justify-center text-primary font-bold text-center">
+            Something went wrong
+          </div>
+        ) : null}
       </div>
     </GenericCard>
   );

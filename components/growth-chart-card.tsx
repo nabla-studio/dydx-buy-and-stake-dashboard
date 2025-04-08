@@ -26,7 +26,9 @@ const chartConfig = {
 
 const Chart = () => {
   const { dates } = useDateFilter();
-  const { data } = useQuery(stakingSupplyHistoryQuery(dates.from, dates.to));
+  const { data, isError, isLoading } = useQuery(
+    stakingSupplyHistoryQuery(dates.from, dates.to),
+  );
 
   const minMax = useMemo(() => {
     if (!data?.length) return undefined;
@@ -37,8 +39,20 @@ const Chart = () => {
     return [min, max];
   }, [data]);
 
+  if (isLoading) {
+    return null;
+  }
+
+  if (isError) {
+    return (
+      <div className="bg-background text-base flex items-center justify-center text-primary font-bold text-center">
+        Something went wrong
+      </div>
+    );
+  }
+
   if (!data || data.length === 0) {
-    return <h3 className="text-foreground text-7xl font-bold">{"N/A"}</h3>;
+    return <h3 className="text-foreground text-7xl font-bold">N/A</h3>;
   }
 
   return (
