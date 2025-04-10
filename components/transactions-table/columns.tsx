@@ -106,7 +106,11 @@ export const columns: ColumnDef<Transaction>[] = [
         );
       }
 
-      return <span className="pl-[50px] font-medium">{value}</span>;
+      return (
+        <span className="pl-[50px] font-medium text-muted-foreground">
+          {value}
+        </span>
+      );
     },
   },
   {
@@ -147,7 +151,7 @@ export const columns: ColumnDef<Transaction>[] = [
         );
       }
 
-      return <span className="font-medium">{value}</span>;
+      return <span className="font-medium text-muted-foreground">{value}</span>;
     },
   },
 ];
