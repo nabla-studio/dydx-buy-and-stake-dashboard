@@ -22,7 +22,11 @@ export function TotalDydxCard({ ...rest }: ComponentProps<"div">) {
   }, [notDefaultValue, dates]);
 
   return (
-    <GenericCard title="Total Bought Back" description={description} {...rest}>
+    <GenericCard
+      title="Total DYDX Bought Back"
+      description={description}
+      {...rest}
+    >
       <div className="relative w-full flex flex-col items-center gap-1">
         <h3 className="text-foreground text-7xl font-bold">{data ?? "N/A"}</h3>
         <p className="text-primary text-sm">DYDX</p>

@@ -23,7 +23,7 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
 
   return (
     <GenericCard
-      title="Total Value of Buybacks"
+      title="Market Value of DYDX Buybacks"
       description={description}
       {...rest}
     >
