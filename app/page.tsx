@@ -10,6 +10,7 @@ import { TotalDydxCard } from "@/components/total-dydx-card";
 import { TotalFeesCard } from "@/components/total-fees-card";
 import { TotalStakedCard } from "@/components/total-staked-card";
 import { TotalUSDCard } from "@/components/total-usd-card";
+import { TransactionsTable } from "@/components/transactions-table";
 import { WalletsCard } from "@/components/wallets-card";
 import { Suspense } from "react";
 
@@ -127,9 +128,7 @@ export default function Home() {
         <Suspense>
           <TotalFeesCard />
         </Suspense>
-        <Suspense>
-          <PercentageFeesCard />
-        </Suspense>
+        <PercentageFeesCard />
 
         <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground">
@@ -162,6 +161,8 @@ export default function Home() {
         <Suspense>
           <GrowthChartCard />
         </Suspense>
+
+        <TransactionsTable />
       </div>
     </section>
   );

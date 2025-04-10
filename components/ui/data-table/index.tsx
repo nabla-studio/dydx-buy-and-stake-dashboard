@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
+import { Button } from "../button";
 import { DataTablePagination } from "./pagination";
 
 interface DataTableProps<TData, TValue> {
@@ -90,7 +91,9 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <div className="flex justify-center items-center">
+        <Button variant="outline">Load more</Button>
+      </div>
     </div>
   );
 }
