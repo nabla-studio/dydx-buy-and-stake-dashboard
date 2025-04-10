@@ -91,35 +91,51 @@ export default function Home() {
 
         <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground mb-5">
-            Protocol data
+            Tracking the Growth of the dYdX Ecosystem
           </p>
 
-          <p className="text-sm text-muted-foreground">
-            This dashboard shows real-time data on DYDX buybacks like revenue,
-            staking, and fee allocation, offering transparent insight into value
-            returned to the ecosystem.
-            <br />
-            dYdX is a community-governed, proof-of-stake blockchain (Cosmos SDK)
-            for perpetuals, supported by subDAOs managing development and
-            sustainable initiatives like the buyback program.{" "}
+          <div className="text-sm text-muted-foreground">
+            The impact of the dYdX Buyback Program is fundamentally tied to the
+            growth of the broader ecosystem. Below, you&apos;ll find real-time
+            data offering transparency across key metrics.
+            <ul className="list-disc pl-10 py-4">
+              <li>
+                Protocol fees reflect trading activity on the platform,
+                indicating overall usage and volume.
+              </li>
+              <li>
+                Staking data provides insight into network security and the
+                amount of DYDX committed to the chain.
+              </li>
+              <li>
+                Wallet holder growth serves as a proxy for ecosystem expansion,
+                highlighting how the community of DYDX token holders is evolving
+                over time.
+              </li>
+            </ul>
+            These metrics together help paint a clear picture of how the buyback
+            program supports and scales with the dYdX ecosystem. Join the
+            conversation and help shape the future of dYdX by sharing feedback
+            on{" "}
             <a
-              href="https://docs.dydx.community"
+              href="https://discord.com/invite/dydx"
               className="text-sm text-primary"
               target="_blank"
               rel="noreferrer"
             >
-              View the docs
+              Discord
             </a>{" "}
-            |{" "}
+            or participating in the community{" "}
             <a
               href="https://dydx.forum"
               target="_blank"
               className="text-sm text-primary"
               rel="noreferrer"
             >
-              Go to Forum
+              Forum
             </a>
-          </p>
+            .
+          </div>
         </div>
 
         <Suspense>
