@@ -15,11 +15,25 @@ import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <section className="pt-24">
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Dashboard
+    <section className="pt-15">
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-[90px]">
+        <h1 className="font-extrabold text-center lg:text-left leading-tight text-5xl lg:text-[84px]">
+          DYDX Buyback
+          <br />
+          Program
         </h1>
+
+        <img
+          className="w-full lg:max-w-1/2 pt-15"
+          src="/coins.png"
+          alt="Coins"
+        />
+      </div>
+
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Dashboard
+        </h2>
 
         <Suspense>
           <DatePickerWithRange />
