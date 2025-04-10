@@ -96,12 +96,12 @@ export function PriceCard({ ...rest }: ComponentProps<"div">) {
             "N/A"
           ) : notDefaultValue ? (
             <span className="flex flex-col items-center">
-              {data.first}
+              {`${data.first} $`}
               <span>-</span>
-              {data.last}
+              {`${data.last} $`}
             </span>
           ) : (
-            data.last
+            `${data.last} $`
           )}
         </h3>
         <p className="text-primary text-sm">USD</p>

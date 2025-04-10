@@ -28,7 +28,9 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
       {...rest}
     >
       <div className="relative w-full flex flex-col items-center gap-1">
-        <h3 className="text-foreground text-7xl font-bold">{data ?? "N/A"}</h3>
+        <h3 className="text-foreground text-7xl font-bold">
+          {data ? `${data} $` : "N/A"}
+        </h3>
         <p className="text-primary text-sm">USD</p>
 
         {isError ? (

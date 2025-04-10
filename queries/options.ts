@@ -70,7 +70,7 @@ export const dydxPriceQuery = (startDate: Date, endDate: Date) =>
     ...genericMetricsQuery(startDate, endDate),
     select(points) {
       const [firstPoint] = points;
-      const lastPpoint = [...points].pop();
+      const lastPoint = [...points].pop();
 
       return {
         first:
@@ -78,8 +78,8 @@ export const dydxPriceQuery = (startDate: Date, endDate: Date) =>
             ? formatCurrencyNumber(firstPoint.priceDYDX)
             : undefined,
         last:
-          lastPpoint?.priceDYDX !== undefined
-            ? formatCurrencyNumber(lastPpoint.priceDYDX)
+          lastPoint?.priceDYDX !== undefined
+            ? formatCurrencyNumber(lastPoint.priceDYDX)
             : undefined,
       };
     },
