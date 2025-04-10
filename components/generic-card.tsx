@@ -36,7 +36,9 @@ export function GenericCard({
       </CardContent>
       <CardFooter className="flex-col gap-2">
         {footer}
-        <div className="text-muted-foreground text-center">{description}</div>
+        <div className="text-muted-foreground text-center text-lg">
+          {description}
+        </div>
       </CardFooter>
     </Card>
   );

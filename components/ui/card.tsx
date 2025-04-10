@@ -29,7 +29,7 @@ function CardTitle({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="card-title"
-      className={cn("leading-none text-lg font-semibold", className)}
+      className={cn("leading-none text-[21px] font-semibold", className)}
       {...props}
     />
   );
@@ -59,7 +59,7 @@ function CardFooter({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="card-footer"
-      className={cn("flex items-center px-6", className)}
+      className={cn("flex items-center px-2", className)}
       {...props}
     />
   );
