@@ -12,8 +12,16 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "dYdX Dashboard",
-  description: "dYdX buy and stake dashboard",
+  openGraph: {
+    title: "DYDX Buyback Program",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "DYDX Buyback Program",
+  },
+  title: "dYdX Buyback Tracker: Powered by the Community",
+  description:
+    "A transparent view into the DYDX Buyback Program. Monitor protocol revenue, monthly buybacks, staking metrics, and the broader dYdX ecosystem, all in real time.",
 };
 
 export default function RootLayout({
