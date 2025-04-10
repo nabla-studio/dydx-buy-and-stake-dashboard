@@ -23,11 +23,11 @@ const chartConfig = {
   },
   protocolRevenue: {
     label: "Protocol Revenue",
-    color: "hsl(var(--chart-1))",
+    color: "hsl(var(--chart-2))",
   },
   buybackFee: {
     label: "Buyback",
-    color: "hsl(var(--chart-2))",
+    color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
 

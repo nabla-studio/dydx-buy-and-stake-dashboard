@@ -19,7 +19,6 @@ import {
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
 import { Button } from "../button";
-import { DataTablePagination } from "./pagination";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

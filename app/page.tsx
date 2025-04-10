@@ -191,6 +191,12 @@ export default function Home() {
           <GrowthChartCard />
         </Suspense>
 
+        <div className="col-span-full pt-2.5">
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Transaction history
+          </p>
+        </div>
+
         <TransactionsTable />
       </div>
     </section>
