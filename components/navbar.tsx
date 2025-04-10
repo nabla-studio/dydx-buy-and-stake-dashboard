@@ -15,9 +15,13 @@ export const Navbar = () => (
     </Link>
 
     <Button asChild>
-      <Link href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard">
+      <a
+        href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
+        target="_blank"
+        rel="noreferrer"
+      >
         Trade
-      </Link>
+      </a>
     </Button>
   </nav>
 );

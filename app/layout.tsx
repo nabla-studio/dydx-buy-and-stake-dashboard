@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import Link from "next/link";
 import { Providers } from "./providers";
 
 const satoshi = localFont({
@@ -36,9 +36,9 @@ export default function RootLayout({
           <Navbar />
           <main className="px-5 xl:px-10 2xl:container">{children}</main>
           <footer className="px-5 xl:px-10 2xl:container pt-20 pb-5">
-            <Link href="/">
+            <a href="https://www.dydx.xyz/" target="_blank" rel="noreferrer">
               <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
-            </Link>
+            </a>
 
             <div className="flex items-center justify-between mt-5 mb-10">
               <p className="text-muted-foreground text-xs font-bold">
@@ -107,6 +107,18 @@ export default function RootLayout({
                       height={24}
                     />
                   </a>
+                </li>
+                <li>
+                  <Button asChild>
+                    <a
+                      href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ml-4"
+                    >
+                      Trade
+                    </a>
+                  </Button>
                 </li>
               </ul>
             </div>
