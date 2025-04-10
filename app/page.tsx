@@ -31,9 +31,9 @@ export default function Home() {
         />
       </div>
 
-      <div className="flex items-center justify-between mb-8">
-        <h2 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Dashboard
+      <div className="flex items-center justify-between mb-8 gap-2">
+        <h2 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
+          dYdX Buyback Tracker: Powered by the Community
         </h2>
 
         <Suspense>
@@ -41,39 +41,52 @@ export default function Home() {
         </Suspense>
       </div>
 
-      <div className="text-base text-muted-foreground mb-20">
-        The <strong className="text-foreground">dYdX Buyback Program</strong>,
-        launched by the{" "}
+      <div className="text-base text-muted-foreground mb-10">
+        The <strong>dYdX Buyback Program</strong>,{" "}
         <a
           className="text-primary"
-          href="https://www.google.com/url?q=https://dydx.forum/t/drc-dydx-treasury-subdao-dydx-buyback-program/3433&sa=D&source=docs&ust=1743515327000781&usg=AOvVaw2bZCqQaUDax5-xa41_5N4B"
+          href="https://dydx.forum/t/drc-dydx-treasury-subdao-dydx-buyback-program/3433"
           target="_blank"
           rel="noreferrer"
         >
-          dYdX Treasury SubDAO
-        </a>
-        , leverages protocol revenue to purchase and stake DYDX tokens,
-        promoting sustainable token economics and long-term community alignment.
-        Activated through a series of on-chain proposals, including{" "}
+          launched by the Treasury SubDAO
+        </a>{" "}
+        and approved through community governance (Proposals{" "}
         <a
+          className="text-primary"
           href="https://www.mintscan.io/dydx/proposals/225"
           target="_blank"
           rel="noreferrer"
-          className="text-primary"
         >
-          Proposal #225
+          #225
         </a>{" "}
-        (Initial Buyback Activation){" "}
+        and{" "}
         <a
+          className="text-primary"
           href="https://www.mintscan.io/dydx/proposals/231"
           target="_blank"
           rel="noreferrer"
-          className="text-primary"
         >
-          Proposal #231
-        </a>{" "}
-        (Stage 2 of the Buyback Program), the initiative reflects a data-driven,
-        transparent approach to treasury management.
+          #231
+        </a>
+        ), allocates 25% of net protocol fees to monthly purchases of DYDX on
+        the open market, with the acquired tokens then staked to support the
+        network. This initiative reinforces long-term confidence in the token,
+        promotes sustainable token economics, and strengthens network security.
+        <br />
+        <br />
+        This dashboard was created by the community to provide ongoing
+        transparency into the buyback program and a broader view of the dYdX
+        ecosystem. If you’d like to buy DYDX tokens, check out this{" "}
+        <a
+          className="text-primary"
+          href="https://www.dydx.xyz/crypto-learning/how-to-purchase-dydx"
+          target="_blank"
+          rel="noreferrer"
+        >
+          guide to learn how
+        </a>
+        .
       </div>
 
       <div className="grid gap-5 md:gap-8 md:grid-cols-3">
