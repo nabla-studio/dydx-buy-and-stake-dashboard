@@ -31,8 +31,8 @@ export default function Home() {
         />
       </div>
 
-      <div className="flex items-center justify-between mb-8 gap-2">
-        <h2 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
+      <div className="flex flex-wrap items-center justify-between mb-8 gap-2">
+        <h2 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-4xl">
           dYdX Buyback Tracker: Powered by the Community
         </h2>
 
@@ -89,7 +89,7 @@ export default function Home() {
         .
       </div>
 
-      <div className="grid gap-5 md:gap-8 md:grid-cols-3">
+      <div className="lg:grid flex flex-col gap-8 lg:grid-cols-3">
         {/* <CirculatingSupplySection className="md:col-span-full" /> */}
 
         <Suspense>
