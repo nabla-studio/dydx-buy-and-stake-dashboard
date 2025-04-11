@@ -63,7 +63,5 @@ jobs:
       # 7. Remove deploy: when PR is closed (or merged).
       - name: Remove PR Preview
         if: ${{ github.event.action == 'closed' }}
-        env:
-          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL}}
         
         run: bun sst remove --stage=pr-${{ github.event.number }}
