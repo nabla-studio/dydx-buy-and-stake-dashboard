@@ -17,7 +17,7 @@ export default $config({
     new sst.aws.StaticSite("Dashboard", {
       // Define building commands
       build: {
-        command: "npm run build",
+        command: "bun run build",
         output: "dist",
       },
       transform: {
