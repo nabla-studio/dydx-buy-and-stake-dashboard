@@ -1,16 +1,20 @@
 import {
+  type Amount,
   getCirculatingSupplyHistory,
   getGenericMetrics,
+  getHistory,
   getStakingSupplyHistory,
   getTotalWallets,
 } from "@/services/numia";
 import { thirtyDaysAgo, today } from "@/state/date-filter";
+import { extractData } from "@/utils/base64";
 import {
   formatCompactNumber,
   formatCurrencyNumber,
   formatPercentageNumber,
 } from "@/utils/number";
-import { queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
+import { assets } from "chain-registry/mainnet/dydx";
 
 export const circulatingSupplyHistoryQuery = queryOptions({
   queryKey: ["circulating-supply-history"],
@@ -175,3 +179,116 @@ export const totalWalletsQuery = queryOptions({
     return formatCompactNumber(data.pagination.total);
   },
 });
+
+export type Transaction = {
+  datetime: string;
+  amount: string;
+  type: "inflow" | "outflow";
+  denom: string;
+  sender: string;
+  recipient: string;
+};
+
+const pageSize = 10;
+
+export const historyQuery = (address: string) =>
+  infiniteQueryOptions({
+    queryKey: ["history", address],
+    queryFn: ({ pageParam }) =>
+      getHistory({
+        address,
+        page: pageParam,
+        pageSize,
+        messageTypes: [
+          "/ibc.core.channel.v1.MsgRecvPacket",
+          "/cosmos.bank.v1beta1.MsgSend",
+        ],
+      }),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _, lastPageParam) => {
+      console.log(lastPage);
+      if (lastPage.length < pageSize) {
+        return undefined;
+      }
+      return lastPageParam + 1;
+    },
+    getPreviousPageParam: (_, __, firstPageParam) => {
+      if (firstPageParam <= 1) {
+        return undefined;
+      }
+      return firstPageParam - 1;
+    },
+    select(data) {
+      const txs: Transaction[] = [];
+
+      const rawTxs = data.pages.flat();
+
+      for (const rawTx of rawTxs) {
+        let txAmount: Amount;
+        let fromAddress: string;
+        let toAddress: string;
+
+        const msg = rawTx.messages.find(
+          (msg) =>
+            msg["@type"] === "/cosmos.bank.v1beta1.MsgSend" ||
+            msg["@type"] === "/ibc.core.channel.v1.MsgRecvPacket",
+        );
+
+        if (!msg) {
+          continue;
+        }
+
+        if (msg["@type"] === "/ibc.core.channel.v1.MsgRecvPacket") {
+          const extractedData = extractData(msg.packet.data.data);
+
+          if (!extractedData) {
+            continue;
+          }
+
+          txAmount = {
+            denom: extractedData.denom,
+            amount: extractedData.amount,
+          };
+
+          fromAddress = extractedData.fromAddress;
+          toAddress = extractedData.toAddress;
+        } else {
+          const [sendTxAmount] = msg.amount;
+          txAmount = sendTxAmount;
+          fromAddress = msg.from_address;
+          toAddress = msg.to_address;
+        }
+
+        const asset = assets.assets.find((a) => a.base === txAmount.denom);
+        const unitDenom = asset?.denom_units.find(
+          (unit) => unit.denom === asset.display,
+        );
+
+        if (!asset || !msg || !txAmount || !unitDenom) {
+          continue;
+        }
+
+        const amount =
+          BigInt(txAmount.amount) / BigInt(10 ** unitDenom.exponent);
+
+        txs.push({
+          datetime: rawTx.blockTimestamp,
+          sender: fromAddress,
+          recipient: toAddress,
+          type: toAddress === address ? "inflow" : "outflow",
+          amount: amount.toString(),
+          denom: asset.display,
+        });
+      }
+
+      return txs;
+    },
+  });
+
+export const stakingWalletAddress =
+  "dydx1vx93pwuxf7j5c90tukj084ka26fclcjuqdmw2a";
+export const buyBackWalletAddress =
+  "dydx1zc0jd76vfluauk6pc6rsq5dkwyjz9h8uqgppj6";
+
+export const stakingWalletHistoryQuery = historyQuery(stakingWalletAddress);
+export const buyBackWalletHistoryQuery = historyQuery(buyBackWalletAddress);

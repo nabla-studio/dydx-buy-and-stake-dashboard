@@ -1,6 +1,11 @@
 "use client";
 
-import { formatCurrencyNumber } from "@/utils/number";
+import {
+  type Transaction,
+  buyBackWalletAddress,
+  stakingWalletAddress,
+} from "@/queries/options";
+import { formatCompactNumber } from "@/utils/number";
 import type { ColumnDef } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { Badge } from "../ui/badge";
@@ -10,18 +15,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-
-export type Transaction = {
-  datetime: string;
-  amount: string;
-  type: "inflow" | "outflow";
-  denom: string;
-  sender: string;
-  recipient: string;
-};
-
-const stakingWalletAddress = "dydx1p3ucd3ptpw902fluyjzhq3ffgq4ntdda3u7e39";
-const buyBackWalletAddress = "dydx18vgsfaarveyg7xy585657ak8a9jvut9z8yuzmv";
 
 export const columns: ColumnDef<Transaction>[] = [
   {
@@ -45,7 +38,7 @@ export const columns: ColumnDef<Transaction>[] = [
     header: "Amount",
     cell(props) {
       return (
-        <span className="font-medium">{`${formatCurrencyNumber(props.getValue() as `${number}`)} ${props.row.original.denom}`}</span>
+        <span className="font-medium uppercase">{`${formatCompactNumber(props.getValue() as `${number}`)} ${props.row.original.denom}`}</span>
       );
     },
   },

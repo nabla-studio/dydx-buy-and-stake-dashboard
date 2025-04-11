@@ -17,6 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 import type { ComponentProps } from "react";
 import { Button } from "../button";
 
@@ -29,8 +30,16 @@ export function DataTable<TData, TValue>({
   className,
   columns,
   data,
+  onLoadMore,
+  enableLoadMore,
+  isLoadingMore,
   ...rest
-}: ComponentProps<"div"> & DataTableProps<TData, TValue>) {
+}: ComponentProps<"div"> &
+  DataTableProps<TData, TValue> & {
+    onLoadMore?: () => void;
+    enableLoadMore?: boolean;
+    isLoadingMore?: boolean;
+  }) {
   const table = useReactTable({
     data,
     columns,
@@ -90,9 +99,18 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex justify-center items-center">
-        <Button variant="outline">Load more</Button>
-      </div>
+      {onLoadMore && enableLoadMore ? (
+        <div className="flex justify-center items-center">
+          <Button
+            variant="outline"
+            onClick={onLoadMore}
+            disabled={isLoadingMore}
+          >
+            Load more
+            {isLoadingMore ? <Loader2 className="animate-spin" /> : null}
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 }

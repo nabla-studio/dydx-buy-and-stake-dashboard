@@ -43,7 +43,7 @@ export default function RootLayout({
               <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
             </a>
 
-            <div className="flex items-center justify-between mt-5 mb-10">
+            <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-between mt-5 mb-10">
               <p className="text-muted-foreground text-xs font-bold">
                 © {new Date().getFullYear()} dYdX Foundation. All rights
                 reserved.
@@ -111,13 +111,12 @@ export default function RootLayout({
                     />
                   </a>
                 </li>
-                <li>
+                <li className="ml-auto lg:ml-4">
                   <Button asChild>
                     <a
                       href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
                       target="_blank"
                       rel="noreferrer"
-                      className="ml-4"
                     >
                       Trade
                     </a>
