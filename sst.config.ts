@@ -3,6 +3,12 @@
 
 // Extract environment variables
 const { DOMAIN_NAME, DOMAIN_CERT_ARN } = process.env;
+const { DEV_DOMAIN_NAME } = process.env;
+
+const getDashboardUrl = () => {
+  const domain = DOMAIN_NAME || DEV_DOMAIN_NAME;
+  return domain ? `https://${domain}/` : "";
+};
 
 export default $config({
   app(input) {
@@ -17,8 +23,11 @@ export default $config({
     new sst.aws.StaticSite("Dashboard", {
       // Define building commands
       build: {
-        command: "npm run build",
+        command: "bun run build",
         output: "dist",
+      },
+      environment: {
+        NEXT_PUBLIC_DASHBOARD_URL: getDashboardUrl(),
       },
       transform: {
         cdn: {
