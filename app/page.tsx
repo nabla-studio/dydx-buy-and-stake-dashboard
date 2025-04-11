@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <section className="pt-15">
       <div className="flex flex-col lg:flex-row items-center justify-between mb-[90px]">
-        <h1 className="font-extrabold text-center lg:text-left leading-tight text-5xl lg:text-[84px]">
+        <h1 className="font-extrabold text-center lg:text-left leading-tight text-5xl lg:text-6xl xl:text-[84px]">
           DYDX Buyback
           <br />
           Program
@@ -32,7 +32,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between mb-8 gap-2">
-        <h2 className="scroll-m-20 text-2xl font-extrabold tracking-tight lg:text-4xl">
+        <h2 className="scroll-m-20 text-2xl font-extrabold tracking-tight xl:text-4xl">
           dYdX Buyback Tracker: Powered by the Community
         </h2>
 
