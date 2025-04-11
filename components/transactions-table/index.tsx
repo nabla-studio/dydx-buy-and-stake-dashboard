@@ -5,6 +5,7 @@ import {
   stakingWalletHistoryQuery,
 } from "@/queries/options";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { compareDesc } from "date-fns";
 import { useCallback, useMemo } from "react";
 import { DataTable } from "../ui/data-table";
 import { columns } from "./columns";
@@ -24,7 +25,10 @@ export const TransactionsTable = () => {
   } = useInfiniteQuery(buyBackWalletHistoryQuery);
 
   const data = useMemo(
-    () => [...(stakingWalletTxs ?? []), ...(buyBackWalletTxs ?? [])],
+    () =>
+      [...(stakingWalletTxs ?? []), ...(buyBackWalletTxs ?? [])].sort((a, b) =>
+        compareDesc(a.datetime, b.datetime),
+      ),
     [buyBackWalletTxs, stakingWalletTxs],
   );
 
