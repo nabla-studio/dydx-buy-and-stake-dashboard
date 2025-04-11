@@ -12,6 +12,8 @@ const satoshi = localFont({
 });
 
 export const metadata: Metadata = {
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
+  metadataBase: new URL(process.env.NEXT_PUBLIC_DASHBOARD_URL!),
   openGraph: {
     title: "DYDX Buyback Program",
   },
