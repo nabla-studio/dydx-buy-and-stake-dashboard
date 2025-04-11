@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build --turbopack",
     "dev": "next dev --turbopack",
     "start": "next start",
     "lint": "biome check",
@@ -24,11 +24,11 @@
     "date-fns": "^4.1.0",
     "ky": "^1.7.5",
     "lucide-react": "^0.479.0",
-    "next": "^15.2.4",
+    "next": "^15.3.0",
     "nuqs": "^2.4.1",
-    "react": "^19.0.0",
+    "react": "^19.1.0",
     "react-day-picker": "8.10.1",
-    "react-dom": "^19.0.0",
+    "react-dom": "^19.1.0",
     "recharts": "^2.15.1",
     "sst": "3.9.22",
     "tailwind-merge": "^3.0.2",
@@ -42,16 +42,14 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "^15.2.4",
+    "eslint-config-next": "^15.3.0",
     "knip": "^5.46.4",
     "msw": "^2.7.3",
     "tailwindcss": "^4",
     "typescript": "^5.8.2"
   },
   "msw": {
-    "workerDirectory": [
-      "public"
-    ]
+    "workerDirectory": ["public"]
   },
   "packageManager": "pnpm@10.4.0+sha512.6b849d0787d97f8f4e1f03a9b8ff8f038e79e153d6f11ae539ae7c435ff9e796df6a862c991502695c7f9e8fac8aeafc1ac5a8dab47e36148d183832d886dd52"
 }
