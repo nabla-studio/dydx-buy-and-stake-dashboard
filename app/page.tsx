@@ -69,10 +69,10 @@ export default function Home() {
         >
           #231
         </a>
-        ), allocates 25% of net protocol fees to monthly purchases of DYDX on
-        the open market, with the acquired tokens then staked to support the
-        network. This initiative reinforces long-term confidence in the token,
-        promotes sustainable token economics, and strengthens network security.
+        ), allocates 25% of net protocol fees to monthly purchases of DYDX, with
+        the acquired tokens then staked to support the network. This initiative
+        reinforces long-term confidence in the token, promotes sustainable token
+        economics, and strengthens network security.
         <br />
         <br />
         This dashboard was created by the community to provide ongoing
