@@ -68,7 +68,7 @@ export function DatePickerWithRange({
             }}
             numberOfMonths={2}
             disabled={{
-              before: new Date("03/11/2025"),
+              before: new Date("03/08/2025"),
               after: new Date(),
             }}
           />
