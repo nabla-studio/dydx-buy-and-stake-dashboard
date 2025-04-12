@@ -121,6 +121,8 @@ export const stakingBalanceQuery = (startDate: Date, endDate: Date) =>
     },
   });
 
+const calcAPY = (apr: number) => (1 + apr / 365) ** 365 - 1;
+
 export const stakingApyQuery = (startDate: Date, endDate: Date) =>
   queryOptions({
     ...stakingSupplyHistoryQuery(startDate, endDate),
@@ -128,14 +130,16 @@ export const stakingApyQuery = (startDate: Date, endDate: Date) =>
       const [firstPoint] = points;
       const lastPoint = [...points].pop();
 
+      console.log(lastPoint);
+
       return {
         first:
           firstPoint?.stakingApr !== undefined
-            ? formatPercentageNumber((firstPoint.stakingApr / 100) * 12)
+            ? formatPercentageNumber(calcAPY(firstPoint.stakingApr / 100))
             : undefined,
         last:
           lastPoint?.stakingApr !== undefined
-            ? formatPercentageNumber((lastPoint.stakingApr / 100) * 12)
+            ? formatPercentageNumber(calcAPY(lastPoint.stakingApr / 100))
             : undefined,
       };
     },
