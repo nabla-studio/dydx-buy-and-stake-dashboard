@@ -76,7 +76,7 @@ export default function Home() {
         <br />
         <br />
         This dashboard was created by the community to provide ongoing
-        transparency into the buyback program and a broader view of the dYdX
+        transparency into the Buyback Program and a broader view of the dYdX
         ecosystem. If you’d like to buy DYDX tokens, check out this{" "}
         <a
           className="text-primary"
@@ -126,8 +126,8 @@ export default function Home() {
                 over time.
               </li>
             </ul>
-            These metrics together help paint a clear picture of how the buyback
-            program supports and scales with the dYdX ecosystem. Join the
+            These metrics together help paint a clear picture of how the Buyback
+            Program supports and scales with the dYdX ecosystem. Join the
             conversation and help shape the future of dYdX by sharing feedback
             on{" "}
             <a

@@ -131,7 +131,7 @@ export function PurchasedChartCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="Protocol Net Fees & DYDX Buybacks"
-      description="Comparison of protocol revenue and buyback allocations."
+      description="Comparison of protocol revenue and Buyback allocations."
       className="relative"
       {...rest}
     >

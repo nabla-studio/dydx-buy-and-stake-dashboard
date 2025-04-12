@@ -15,10 +15,10 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
 
   const description = useMemo(() => {
     if (notDefaultValue) {
-      return `Aggregate value of all buybacks from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
+      return `Aggregate value of all Buybacks from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
     }
 
-    return "Aggregate value of all buybacks, converted in USD.";
+    return "Aggregate value of all Buybacks, converted in USD.";
   }, [notDefaultValue, dates]);
 
   return (

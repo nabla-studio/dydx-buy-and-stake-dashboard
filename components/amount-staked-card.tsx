@@ -13,10 +13,10 @@ export function AmountStakedCard({ ...rest }: ComponentProps<"div">) {
 
   const description = useMemo(() => {
     if (notDefaultValue) {
-      return `DYDX staked through buybacks from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
+      return `DYDX staked through Buybacks from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
     }
 
-    return "DYDX staked through Treasury SubDAO buybacks.";
+    return "DYDX staked through Treasury SubDAO Buybacks.";
   }, [notDefaultValue, dates]);
 
   return (

@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   title: "dYdX Buyback Tracker: Powered by the Community",
   description:
-    "A transparent view into the DYDX Buyback Program. Monitor protocol revenue, monthly buybacks, staking metrics, and the broader dYdX ecosystem, all in real time.",
+    "A transparent view into the DYDX Buyback Program. Monitor protocol revenue, monthly Buybacks, staking metrics, and the broader dYdX ecosystem, all in real time.",
 };
 
 export default function RootLayout({
