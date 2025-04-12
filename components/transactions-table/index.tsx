@@ -56,6 +56,7 @@ export const TransactionsTable = () => {
       columns={columns}
       data={data ?? []}
       onLoadMore={onLoadMore}
+      getRowHref={(row) => `https://mintscan.io/dydx/txs/${row.txHash}`}
       enableLoadMore={hasNextPage}
       isLoadingMore={isLoading}
     />

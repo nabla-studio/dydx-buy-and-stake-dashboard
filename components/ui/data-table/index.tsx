@@ -31,12 +31,14 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   onLoadMore,
+  getRowHref,
   enableLoadMore,
   isLoadingMore,
   ...rest
 }: ComponentProps<"div"> &
   DataTableProps<TData, TValue> & {
     onLoadMore?: () => void;
+    getRowHref?: (row: TData) => string;
     enableLoadMore?: boolean;
     isLoadingMore?: boolean;
   }) {
@@ -75,6 +77,12 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  onClick={
+                    getRowHref
+                      ? () => window.open(getRowHref(row.original), "_blank")
+                      : undefined
+                  }
+                  className={getRowHref ? "cursor-pointer" : ""}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
