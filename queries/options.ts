@@ -206,7 +206,6 @@ export const historyQuery = (address: string) =>
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, _, lastPageParam) => {
-      console.log(lastPage);
       if (lastPage.length < pageSize) {
         return undefined;
       }
