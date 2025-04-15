@@ -44,11 +44,6 @@ export default function RootLayout({
             </a>
 
             <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-between mt-5 mb-10">
-              <p className="text-muted-foreground text-xs font-bold">
-                © {new Date().getFullYear()} dYdX Foundation. All rights
-                reserved.
-              </p>
-
               <ul className="flex gap-4 items-center">
                 <li>
                   <a
@@ -146,7 +141,18 @@ export default function RootLayout({
               diligence before engaging in any activity involving crypto-assets.
               dYdX is a decentralised, disintermediated and permissionless
               protocol, and is not available in the U.S. or to U.S. persons as
-              well as in other restricted jurisdictions.
+              well as in other restricted jurisdictions. nabla srl benefit
+              corporation has received a grant from the dYdX Ecosystem
+              Development Program to create and administer the Site, without any
+              ongoing control or direction by the dYdX Foundation, dYdX Trading
+              Inc. and/or any other dYdX-affiliated entities (collectively,
+              “dYdX Entities”). nabla srl benefit corporation is fully
+              independent from, and unaffiliated with, any of the dYdX entities.
+              Under no circumstances shall any of the dYdX Entities be held
+              liable for any loss or damage of any kind incurred as a result of
+              the use of the Site or the information or the activities herein,
+              including but not limited to, direct, indirect, incidental,
+              punitive, and consequential damages.
             </p>
           </footer>
         </Providers>
