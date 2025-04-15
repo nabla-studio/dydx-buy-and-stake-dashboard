@@ -2,8 +2,9 @@
 
 import { useDateFilter } from "@/hooks/date-filter";
 import { buybackFeeShareQuery } from "@/queries/options";
+import { formatShortDate } from "@/utils/date";
 import { useQuery } from "@tanstack/react-query";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useMemo } from "react";
 import { GenericCard } from "./generic-card";
 
 export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
@@ -12,10 +13,18 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
     buybackFeeShareQuery(dates.from, dates.to),
   );
 
+  const description = useMemo(() => {
+    if (notDefaultValue) {
+      return `Shares of protocol fees directed to the Buyback Program from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
+    }
+
+    return "Current shares of protocol fees directed to the Buyback Program.";
+  }, [notDefaultValue, dates]);
+
   return (
     <GenericCard
       title="Fees Allocated to Buybacks"
-      description="Share of protocol fees directed to the Buyback Program."
+      description={description}
       {...rest}
     >
       <div className="relative w-full flex flex-col items-center gap-1">
