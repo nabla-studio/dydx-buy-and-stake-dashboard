@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     ? new URL(process.env.NEXT_PUBLIC_DASHBOARD_URL)
     : undefined,
   openGraph: {
-    title: "DYDX Buyback Program",
+    title: "dYdX Buyback Tracker: Powered by the Community",
   },
   twitter: {
     card: "summary_large_image",
-    title: "DYDX Buyback Program",
+    title: "dYdX Buyback Tracker: Powered by the Community",
   },
   title: "dYdX Buyback Tracker: Powered by the Community",
   description:
