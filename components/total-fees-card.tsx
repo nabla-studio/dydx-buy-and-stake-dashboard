@@ -22,10 +22,10 @@ export function TotalFeesCard({ ...rest }: ComponentProps<"div">) {
 
   const description = useMemo(() => {
     if (notDefaultValue) {
-      return `dYdY Protocol's total fees from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
+      return `dYdX Protocol's total fees from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
     }
 
-    return "dYdY Protocol's total fees since Buyback Program launched.";
+    return "dYdX Protocol's total fees since Buyback Program launched.";
   }, [notDefaultValue, dates]);
 
   return (
