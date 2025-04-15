@@ -4,8 +4,15 @@ import { useDateFilter } from "@/hooks/date-filter";
 import { totalUsdBoughtBackQuery } from "@/queries/options";
 import { formatShortDate } from "@/utils/date";
 import { useQuery } from "@tanstack/react-query";
+import { InfoIcon } from "lucide-react";
 import { type ComponentProps, useMemo } from "react";
 import { GenericCard } from "./generic-card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
   const { dates, notDefaultValue } = useDateFilter();
@@ -24,6 +31,20 @@ export function TotalUSDCard({ ...rest }: ComponentProps<"div">) {
   return (
     <GenericCard
       title="Market Value of DYDX Buybacks"
+      actions={
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <InfoIcon size={24} />
+            </TooltipTrigger>
+            <TooltipContent className="max-w-64">
+              Calculated by multiplying the cumulative number of DYDX tokens
+              repurchased since the inception of the Buyback program by the
+              current market price of the DYDX token.
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      }
       description={description}
       {...rest}
     >

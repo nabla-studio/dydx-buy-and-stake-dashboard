@@ -114,7 +114,6 @@
   --color-sidebar-ring: var(--sidebar-ring);
   --default-font-family: var(--font-satoshio);
   --font-sans: var(--font-satoshi);
-  --font-mono: var(--font-satoshi);
 }
 
 @layer base {

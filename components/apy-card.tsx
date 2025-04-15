@@ -3,8 +3,13 @@
 import { useDateFilter } from "@/hooks/date-filter";
 import { stakingApyQuery } from "@/queries/options";
 import { useQuery } from "@tanstack/react-query";
+import { InfoIcon } from "lucide-react";
 import type { ComponentProps } from "react";
+import { ApyFormula } from "./apy-formula";
 import { GenericCard } from "./generic-card";
+import { TooltipContent } from "./ui/tooltip";
+import { Tooltip, TooltipTrigger } from "./ui/tooltip";
+import { TooltipProvider } from "./ui/tooltip";
 
 export function ApyCard({ ...rest }: ComponentProps<"div">) {
   const { dates, notDefaultValue } = useDateFilter();
@@ -14,6 +19,21 @@ export function ApyCard({ ...rest }: ComponentProps<"div">) {
     <GenericCard
       title="Estimated APY"
       description="Projected yearly return on staked DYDX."
+      actions={
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <InfoIcon size={24} />
+            </TooltipTrigger>
+            <TooltipContent className="max-w-64">
+              Calculated by converting the APR to an annual yield using the
+              formula:
+              <ApyFormula />
+              assuming daily compounding.
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      }
       {...rest}
     >
       <div className="relative w-full flex flex-col items-center gap-1">
