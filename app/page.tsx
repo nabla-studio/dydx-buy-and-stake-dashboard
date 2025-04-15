@@ -103,11 +103,11 @@ export default function Home() {
         </Suspense>
 
         <div className="col-span-full pt-2.5">
-          <p className="font-bold uppercase text-xs text-muted-foreground mb-5">
+          <p className="font-bold uppercase text-sm text-muted-foreground mb-5">
             Tracking the Growth of the dYdX Ecosystem
           </p>
 
-          <div className="text-sm text-muted-foreground">
+          <div className="text-base text-muted-foreground">
             The impact of the dYdX Buyback Program is fundamentally tied to the
             growth of the broader ecosystem. Below, you&apos;ll find real-time
             data offering transparency across key metrics.
