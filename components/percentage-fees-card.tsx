@@ -15,10 +15,10 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
 
   const description = useMemo(() => {
     if (notDefaultValue) {
-      return `Shares of protocol fees directed to the Buyback Program from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
+      return `Share of net protocol fees directed to the Buyback Program from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
     }
 
-    return "Current shares of protocol fees directed to the Buyback Program.";
+    return "Share of net protocol fees directed to the Buyback Program.";
   }, [notDefaultValue, dates]);
 
   return (
