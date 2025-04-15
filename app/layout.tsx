@@ -43,7 +43,7 @@ export default function RootLayout({
               <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
             </a>
 
-            <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-between mt-5 mb-10">
+            <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-end mt-5 mb-10">
               <ul className="flex gap-4 items-center">
                 <li>
                   <a
@@ -120,7 +120,7 @@ export default function RootLayout({
               </ul>
             </div>
 
-            <p className=" leading-normal text-muted-foreground text-xs">
+            <p className="text-justify leading-normal text-muted-foreground text-xs">
               Nothing in this website should be used or considered as legal,
               financial, tax, or any other advice, nor as an instruction or
               invitation to act by anyone. Users should conduct their own
