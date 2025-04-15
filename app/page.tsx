@@ -157,7 +157,9 @@ export default function Home() {
         <Suspense>
           <TotalFeesCard />
         </Suspense>
-        <PercentageFeesCard />
+        <Suspense>
+          <PercentageFeesCard />
+        </Suspense>
 
         <div className="col-span-full pt-2.5">
           <p className="font-bold uppercase text-xs text-muted-foreground">
