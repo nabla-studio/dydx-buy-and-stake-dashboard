@@ -39,7 +39,7 @@ export function PercentageFeesCard({ ...rest }: ComponentProps<"div">) {
                 {data.last}
               </span>
             ) : (
-              "0"
+              data.last
             )
           ) : (
             data.last
