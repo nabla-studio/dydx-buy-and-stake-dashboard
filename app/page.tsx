@@ -25,7 +25,7 @@ export default function Home() {
         </h1>
 
         <img
-          className="w-full lg:max-w-1/2 pt-15"
+          className="max-w-4/5 lg:max-w-2/5 pt-30 pb-15 md:pt-15"
           src="/coins.png"
           alt="Coins"
         />
