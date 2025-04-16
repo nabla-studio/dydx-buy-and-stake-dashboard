@@ -130,8 +130,6 @@ export const stakingApyQuery = (startDate: Date, endDate: Date) =>
       const [firstPoint] = points;
       const lastPoint = [...points].pop();
 
-      console.log(lastPoint);
-
       return {
         first:
           firstPoint?.stakingApr !== undefined
