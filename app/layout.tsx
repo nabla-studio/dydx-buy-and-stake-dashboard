@@ -39,85 +39,96 @@ export default function RootLayout({
           <Navbar />
           <main className="px-5 xl:px-10 2xl:container">{children}</main>
           <footer className="px-5 xl:px-10 2xl:container pt-20 pb-5">
-            <a href="https://www.dydx.xyz/" target="_blank" rel="noreferrer">
-              <Image alt="dYdX logo" src="/logo.svg" width={100} height={32} />
-            </a>
+            <div className="flex justify-between mb-10">
+              <a href="https://www.dydx.xyz/" target="_blank" rel="noreferrer">
+                <Image
+                  alt="dYdX logo"
+                  src="/logo.svg"
+                  width={100}
+                  height={32}
+                />
+              </a>
 
-            <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-end mt-5 mb-10">
-              <ul className="flex gap-4 items-center">
-                <li>
-                  <a
-                    href="https://github.com/dydxprotocol"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Image
-                      alt="Github"
-                      src="/github.svg"
-                      width={24}
-                      height={24}
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://discord.com/invite/dydx"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Image
-                      alt="Discord"
-                      src="/discord.svg"
-                      width={24}
-                      height={24}
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.reddit.com/r/dydxprotocol/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Image
-                      alt="Reddit"
-                      src="/reddit.svg"
-                      width={24}
-                      height={24}
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a href="https://x.com/dYdX" target="_blank" rel="noreferrer">
-                    <Image alt="X" src="/x.svg" width={24} height={24} />
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.youtube.com/@dYdXprotocol"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <Image
-                      alt="Youtube"
-                      src="/youtube.svg"
-                      width={24}
-                      height={24}
-                    />
-                  </a>
-                </li>
-                <li className="ml-auto lg:ml-4">
-                  <Button asChild>
+              <div className="flex flex-col lg:flex-row gap-4 lg:items-center justify-end">
+                <ul className="flex gap-4 items-center">
+                  <li>
                     <a
-                      href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
+                      href="https://github.com/dydxprotocol"
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Trade
+                      <Image
+                        alt="Github"
+                        src="/github.svg"
+                        width={24}
+                        height={24}
+                      />
                     </a>
-                  </Button>
-                </li>
-              </ul>
+                  </li>
+                  <li>
+                    <a
+                      href="https://discord.com/invite/dydx"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Image
+                        alt="Discord"
+                        src="/discord.svg"
+                        width={24}
+                        height={24}
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.reddit.com/r/dydxprotocol/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Image
+                        alt="Reddit"
+                        src="/reddit.svg"
+                        width={24}
+                        height={24}
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://x.com/dYdX"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Image alt="X" src="/x.svg" width={24} height={24} />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.youtube.com/@dYdXprotocol"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Image
+                        alt="Youtube"
+                        src="/youtube.svg"
+                        width={24}
+                        height={24}
+                      />
+                    </a>
+                  </li>
+                  <li className="ml-auto lg:ml-4">
+                    <Button asChild>
+                      <a
+                        href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        Trade
+                      </a>
+                    </Button>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <p className="text-justify leading-normal text-muted-foreground text-xs">
@@ -154,6 +165,24 @@ export default function RootLayout({
               including but not limited to, direct, indirect, incidental,
               punitive, and consequential damages.
             </p>
+
+            <div className="flex justify-end">
+              <a
+                href="https://www.nabla.studio/"
+                target="_blank"
+                rel="noreferrer"
+                className="group mt-5 text-sm font-bold flex items-center gap-1"
+              >
+                <span className="opacity-50">a project powered by</span>
+                <Image
+                  src="/nabla_logo.svg"
+                  alt="nabla"
+                  className="w-auto h-3 opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                  width={443}
+                  height={81}
+                />
+              </a>
+            </div>
           </footer>
         </Providers>
       </body>
