@@ -1,17 +1,18 @@
-# Workflow name: "sst deploy"
-name: sst deploy
+# Workflow name: "sst preview deploy"
+name: sst preview deploy
 
 # Trigger configuration:
-# - push: automatically triggers the workflow when a push is made to the "prod" branch.
+# - pull_request: automatically triggers the workflow when a pr action is made to the "dev" branch.
 on:
-  push:
+  pull_request:
     branches:
-      - prod
+      - dev
+    types: [opened, synchronize, reopened, closed]
 
 # Concurrency configuration: prevents multiple simultaneous executions on the same branch.
 # The concurrency group is defined by the GitHub reference (branch or tag) that triggered the workflow.
 concurrency: 
-  group: ${{ github.ref }}
+  group: pr-${{ github.event.number }}
 
 jobs:
   deploy:
@@ -47,15 +48,21 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.PROD_ROLE_ARN }}
+          role-to-assume: ${{ secrets.DEV_ROLE_ARN }}
           aws-region: ${{ secrets.AWS_REGION }}
 
       # 6. Deploy the application:
-      #    Executes the command "bun sst deploy" over the prod stage.
-      - name: Deploy
+      #    Executes the command "bun sst deploy" if action is not "closed".
+      - name: Deploy PR Preview
+        if: ${{ github.event.action != 'closed' }}
         env:
-          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
-          DOMAIN_CERT_ARN: ${{ secrets.DOMAIN_CERT_ARN }}
+          DEV_DOMAIN_NAME: ${{ secrets.DEV_DOMAIN_NAME}}
+          NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL}}
 
-        run: |
-          bunx sst deploy --stage=prod
+        run: bun sst deploy --stage=pr-${{ github.event.number }}
+    
+      # 7. Remove deploy: when PR is closed (or merged).
+      - name: Remove PR Preview
+        if: ${{ github.event.action == 'closed' }}
+        
+        run: bun sst remove --stage=pr-${{ github.event.number }}
