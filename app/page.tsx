@@ -1,101 +1,206 @@
-import Image from "next/image";
+import { AmountStakedCard } from "@/components/amount-staked-card";
+import { ApyCard } from "@/components/apy-card";
+import { DatePickerWithRange } from "@/components/global-date-filter";
+import { GrowthChartCard } from "@/components/growth-chart-card";
+import { NextAmountCard } from "@/components/next-amount-card";
+import { PercentageFeesCard } from "@/components/percentage-fees-card";
+import { PriceCard } from "@/components/price-card";
+import { PurchasedChartCard } from "@/components/purchased-chart-card";
+import { TotalDydxCard } from "@/components/total-dydx-card";
+import { TotalFeesCard } from "@/components/total-fees-card";
+import { TotalStakedCard } from "@/components/total-staked-card";
+import { TotalUSDCard } from "@/components/total-usd-card";
+import { TransactionsTable } from "@/components/transactions-table";
+import { WalletsCard } from "@/components/wallets-card";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <section className="pt-15">
+      <div className="flex flex-col lg:flex-row items-center justify-between mb-[90px]">
+        <h1 className="font-extrabold text-center lg:text-left leading-tight text-5xl lg:text-6xl xl:text-[84px]">
+          DYDX Buyback
+          <br />
+          Program
+        </h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+        <img
+          className="max-w-4/5 lg:max-w-2/5 pt-30 pb-15 md:pt-15"
+          src="/coins.png"
+          alt="Coins"
+        />
+      </div>
+
+      <div className="flex flex-wrap items-center justify-between mb-8 gap-2">
+        <h2 className="scroll-m-20 text-2xl font-extrabold tracking-tight xl:text-4xl">
+          dYdX Buyback Tracker: Powered by the Community
+        </h2>
+
+        <Suspense>
+          <DatePickerWithRange />
+        </Suspense>
+      </div>
+
+      <div className="text-base text-muted-foreground mb-10">
+        The <strong>dYdX Buyback Program</strong>,{" "}
+        <a
+          className="text-primary"
+          href="https://dydx.forum/t/drc-dydx-treasury-subdao-dydx-buyback-program/3433"
+          target="_blank"
+          rel="noreferrer"
+        >
+          launched by the Treasury SubDAO
+        </a>{" "}
+        and approved through community governance (Proposals{" "}
+        <a
+          className="text-primary"
+          href="https://www.mintscan.io/dydx/proposals/225"
+          target="_blank"
+          rel="noreferrer"
+        >
+          #225
+        </a>{" "}
+        and{" "}
+        <a
+          className="text-primary"
+          href="https://www.mintscan.io/dydx/proposals/231"
+          target="_blank"
+          rel="noreferrer"
+        >
+          #231
+        </a>
+        ), allocates 25% of net protocol fees to monthly purchases of DYDX, with
+        the acquired tokens then staked to support the network. This initiative
+        reinforces long-term confidence in the token, promotes sustainable token
+        economics, and strengthens network security.
+        <br />
+        <br />
+        This dashboard was created by the community to provide ongoing
+        transparency into the Buyback Program and a broader view of the dYdX
+        ecosystem. If you’d like to buy DYDX tokens, check out this{" "}
+        <a
+          className="text-primary"
+          href="https://www.dydx.xyz/crypto-learning/how-to-purchase-dydx"
+          target="_blank"
+          rel="noreferrer"
+        >
+          guide to learn how
+        </a>
+        .
+      </div>
+
+      <div className="lg:grid flex flex-col gap-8 lg:grid-cols-3">
+        {/* <CirculatingSupplySection className="md:col-span-full" /> */}
+
+        <Suspense>
+          <TotalDydxCard />
+        </Suspense>
+        <Suspense>
+          <TotalUSDCard />
+        </Suspense>
+        <Suspense>
+          <NextAmountCard />
+        </Suspense>
+
+        <div className="col-span-full pt-2.5">
+          <p className="font-bold uppercase text-sm text-muted-foreground mb-5">
+            Tracking the Growth of the dYdX Ecosystem
+          </p>
+
+          <div className="text-base text-muted-foreground">
+            The impact of the dYdX Buyback Program is fundamentally tied to the
+            growth of the broader ecosystem. Below, you&apos;ll find real-time
+            data offering transparency across key metrics.
+            <ul className="list-disc pl-10 py-4">
+              <li>
+                Protocol fees reflect trading activity on the platform,
+                indicating overall usage and volume.
+              </li>
+              <li>
+                Staking data provides insight into network security and the
+                amount of DYDX committed to the chain.
+              </li>
+              <li>
+                Wallet holder growth serves as a proxy for ecosystem expansion,
+                highlighting how the community of DYDX token holders is evolving
+                over time.
+              </li>
+            </ul>
+            These metrics together help paint a clear picture of how the Buyback
+            Program supports and scales with the dYdX ecosystem. Join the
+            conversation and help shape the future of dYdX by sharing feedback
+            on{" "}
+            <a
+              href="https://discord.com/invite/dydx"
+              className="text-sm text-primary"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Discord
+            </a>{" "}
+            or participating in the community{" "}
+            <a
+              href="https://dydx.forum"
+              target="_blank"
+              className="text-sm text-primary"
+              rel="noreferrer"
+            >
+              Forum
+            </a>
+            .
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        <Suspense>
+          <PurchasedChartCard />
+        </Suspense>
+        <Suspense>
+          <TotalFeesCard />
+        </Suspense>
+        <Suspense>
+          <PercentageFeesCard />
+        </Suspense>
+
+        <div className="col-span-full pt-2.5">
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Staking overview
+          </p>
+        </div>
+
+        <Suspense>
+          <TotalStakedCard />
+        </Suspense>
+        <Suspense>
+          <AmountStakedCard />
+        </Suspense>
+        <Suspense>
+          <ApyCard />
+        </Suspense>
+
+        <div className="col-span-full pt-2.5">
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Network stats
+          </p>
+        </div>
+
+        <Suspense>
+          <PriceCard />
+        </Suspense>
+        <Suspense>
+          <WalletsCard />
+        </Suspense>
+        <Suspense>
+          <GrowthChartCard />
+        </Suspense>
+
+        <div className="col-span-full pt-2.5">
+          <p className="font-bold uppercase text-xs text-muted-foreground">
+            Transaction history
+          </p>
+        </div>
+
+        <TransactionsTable />
+      </div>
+    </section>
   );
 }

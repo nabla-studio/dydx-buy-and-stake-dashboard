@@ -1,0 +1,51 @@
+"use client";
+
+import { useDateFilter } from "@/hooks/date-filter";
+import { stakingSupplyHistoryQuery } from "@/queries/options";
+import { formatShortDate } from "@/utils/date";
+import { formatCurrencyNumber } from "@/utils/number";
+import { useQuery } from "@tanstack/react-query";
+import { type ComponentProps, useMemo } from "react";
+import { GenericCard } from "./generic-card";
+
+export function TotalFeesCard({ ...rest }: ComponentProps<"div">) {
+  const { dates, notDefaultValue } = useDateFilter();
+
+  const { data, isError } = useQuery({
+    ...stakingSupplyHistoryQuery(dates.from, dates.to),
+    select(data) {
+      return formatCurrencyNumber(
+        data.map((el) => el.protocolRevenue).reduce((p, c) => p + c, 0),
+      );
+    },
+  });
+
+  const description = useMemo(() => {
+    if (notDefaultValue) {
+      return `dYdX Protocol's total fees from ${formatShortDate(dates.from)} to ${formatShortDate(dates.to)}.`;
+    }
+
+    return "dYdX Protocol's total fees since Buyback Program launched.";
+  }, [notDefaultValue, dates]);
+
+  return (
+    <GenericCard
+      title="Total Protocol Fees Generated"
+      description={description}
+      {...rest}
+    >
+      <div className="relative w-full flex flex-col items-center gap-1">
+        <h3 className="text-foreground text-7xl font-bold">
+          {data ? `${data} $` : "N/A"}
+        </h3>
+        <p className="text-primary text-sm">USD</p>
+
+        {isError ? (
+          <div className="absolute inset-0 bg-background text-base flex items-center justify-center text-primary font-bold text-center">
+            Something went wrong
+          </div>
+        ) : null}
+      </div>
+    </GenericCard>
+  );
+}
