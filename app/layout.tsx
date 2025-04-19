@@ -173,7 +173,7 @@ export default function RootLayout({
                 rel="noreferrer"
                 className="group mt-5 text-sm font-bold flex items-center gap-1"
               >
-                <span className="opacity-50">a project powered by</span>
+                <span className="opacity-50">proudly made by</span>
                 <Image
                   src="/nabla_logo.svg"
                   alt="nabla"
