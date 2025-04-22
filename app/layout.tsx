@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-import { Button } from "@/components/ui/button";
+import { TradeButton } from "@/components/trade-button";
 import Image from "next/image";
 import { Providers } from "./providers";
 
@@ -117,15 +117,7 @@ export default function RootLayout({
                     </a>
                   </li>
                   <li className="ml-auto lg:ml-4">
-                    <Button asChild>
-                      <a
-                        href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        Trade
-                      </a>
-                    </Button>
+                    <TradeButton />
                   </li>
                 </ul>
               </div>

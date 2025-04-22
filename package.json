@@ -11,11 +11,12 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@radix-ui/react-popover": "^1.1.6",
+    "@radix-ui/react-alert-dialog": "1.1.6",
+    "@radix-ui/react-popover": "1.1.6",
     "@radix-ui/react-select": "^2.1.6",
-    "@radix-ui/react-slot": "^1.1.2",
-    "@radix-ui/react-toggle": "^1.1.2",
-    "@radix-ui/react-toggle-group": "^1.1.2",
+    "@radix-ui/react-slot": "1.1.2",
+    "@radix-ui/react-toggle": "1.1.2",
+    "@radix-ui/react-toggle-group": "1.1.2",
     "@radix-ui/react-tooltip": "^1.2.0",
     "@scure/base": "^1.2.4",
     "@tanstack/react-query": "^5.67.2",
@@ -51,7 +52,9 @@
     "typescript": "^5.8.2"
   },
   "msw": {
-    "workerDirectory": ["public"]
+    "workerDirectory": [
+      "public"
+    ]
   },
   "packageManager": "pnpm@10.4.0+sha512.6b849d0787d97f8f4e1f03a9b8ff8f038e79e153d6f11ae539ae7c435ff9e796df6a862c991502695c7f9e8fac8aeafc1ac5a8dab47e36148d183832d886dd52"
 }
