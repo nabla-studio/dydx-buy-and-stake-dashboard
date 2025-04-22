@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { TradeButton } from "./trade-button";
 
 export const Navbar = () => (
   <nav className="px-5 xl:px-10 2xl:container pb-5 pt-10 flex items-center justify-between">
@@ -14,14 +14,6 @@ export const Navbar = () => (
       </span>
     </Link>
 
-    <Button asChild>
-      <a
-        href="https://dydx.trade/?utm_source=dydx-buy-and-stake-dashboard"
-        target="_blank"
-        rel="noreferrer"
-      >
-        Trade
-      </a>
-    </Button>
+    <TradeButton />
   </nav>
 );
