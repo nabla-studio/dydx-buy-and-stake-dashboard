@@ -111,7 +111,7 @@ export interface RawTransaction {
   addressIndex: string[];
   messageTypes: string[];
   memo: string;
-  messages: (MsgSend | MsgRecvPacket)[];
+  messages: (MsgSend | MsgRecvPacket | MsgTransfer)[];
   ingested_at: string;
   metadata: string[];
   prices: number[];
@@ -156,6 +156,18 @@ export interface MsgRecvPacket {
   proof_commitment: string;
   proof_height: TimeoutHeight;
   "@type": "/ibc.core.channel.v1.MsgRecvPacket";
+}
+
+export interface MsgTransfer {
+  source_port: string;
+  source_channel: string;
+  token: Amount;
+  sender: string;
+  receiver: string;
+  timeout_height: TimeoutHeight;
+  timeout_timestamp: string;
+  memo: string;
+  "@type": "/ibc.applications.transfer.v1.MsgTransfer";
 }
 
 export interface Amount {
