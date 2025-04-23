@@ -214,6 +214,7 @@ export const historyQuery = (address: string) =>
         page: pageParam,
         pageSize,
         messageTypes: [
+          "/ibc.applications.transfer.v1.MsgTransfer",
           "/ibc.core.channel.v1.MsgRecvPacket",
           "/cosmos.bank.v1beta1.MsgSend",
         ],
@@ -244,32 +245,43 @@ export const historyQuery = (address: string) =>
         const msg = rawTx.messages.find(
           (msg) =>
             msg["@type"] === "/cosmos.bank.v1beta1.MsgSend" ||
-            msg["@type"] === "/ibc.core.channel.v1.MsgRecvPacket",
+            msg["@type"] === "/ibc.core.channel.v1.MsgRecvPacket" ||
+            msg["@type"] === "/ibc.applications.transfer.v1.MsgTransfer",
         );
 
         if (!msg) {
           continue;
         }
 
-        if (msg["@type"] === "/ibc.core.channel.v1.MsgRecvPacket") {
-          const extractedData = extractData(msg.packet.data.data);
+        switch (msg["@type"]) {
+          case "/ibc.core.channel.v1.MsgRecvPacket": {
+            const extractedData = extractData(msg.packet.data.data);
 
-          if (!extractedData) {
-            continue;
+            if (!extractedData) {
+              continue;
+            }
+
+            txAmount = {
+              denom: extractedData.denom,
+              amount: extractedData.amount,
+            };
+
+            fromAddress = extractedData.fromAddress;
+            toAddress = extractedData.toAddress;
+            break;
           }
-
-          txAmount = {
-            denom: extractedData.denom,
-            amount: extractedData.amount,
-          };
-
-          fromAddress = extractedData.fromAddress;
-          toAddress = extractedData.toAddress;
-        } else {
-          const [sendTxAmount] = msg.amount;
-          txAmount = sendTxAmount;
-          fromAddress = msg.from_address;
-          toAddress = msg.to_address;
+          case "/ibc.applications.transfer.v1.MsgTransfer": {
+            txAmount = msg.token;
+            fromAddress = msg.sender;
+            toAddress = msg.receiver;
+            break;
+          }
+          default: {
+            const [sendTxAmount] = msg.amount;
+            txAmount = sendTxAmount;
+            fromAddress = msg.from_address;
+            toAddress = msg.to_address;
+          }
         }
 
         const asset = assets.assets.find((a) => a.base === txAmount.denom);
