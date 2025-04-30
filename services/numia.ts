@@ -10,6 +10,7 @@ interface GetStakingSupplyHistoryResponse {
   stakingSupply: number;
   stakingApr: number;
   protocolRevenue: number;
+  buybackDeposit: number;
   buybackFee: number;
   buybackFeeShare: number;
   historicUsers: number;
