@@ -69,6 +69,15 @@ export const totalUsdBoughtBackQuery = (startDate: Date, endDate: Date) =>
     },
   });
 
+export const dydxCurrentPriceQuery = queryOptions({
+  ...genericMetricsQuery(thirtyDaysAgo, today),
+  select(points) {
+    const lastPoint = [...points].pop();
+
+    return lastPoint?.priceDYDX;
+  },
+});
+
 export const dydxPriceQuery = (startDate: Date, endDate: Date) =>
   queryOptions({
     ...genericMetricsQuery(startDate, endDate),
@@ -174,14 +183,12 @@ export const buybackFeeShareQuery = (startDate: Date, endDate: Date) =>
     },
   });
 
-export const nextBuybackAmountQuery = queryOptions({
-  ...genericMetricsQuery(thirtyDaysAgo, today),
+export const buybackDepositAmountQuery = queryOptions({
+  ...stakingSupplyHistoryQuery(thirtyDaysAgo, today),
   select(points) {
     const point = [...points].pop();
 
-    return point?.priceDYDX !== undefined && point.liquidBalanceUSDC
-      ? formatCompactNumber(point.liquidBalanceUSDC / point.priceDYDX)
-      : undefined;
+    return point?.buybackDeposit;
   },
 });
 

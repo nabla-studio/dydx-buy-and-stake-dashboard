@@ -1,14 +1,31 @@
 "use client";
 
 import { useDateFilter } from "@/hooks/date-filter";
-import { nextBuybackAmountQuery } from "@/queries/options";
+import {
+  buybackDepositAmountQuery,
+  dydxCurrentPriceQuery,
+} from "@/queries/options";
+import { formatCompactNumber } from "@/utils/number";
 import { useQuery } from "@tanstack/react-query";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useMemo } from "react";
 import { GenericCard } from "./generic-card";
 
 export function NextAmountCard({ ...rest }: ComponentProps<"div">) {
   const { notDefaultValue } = useDateFilter();
-  const { data, isError } = useQuery(nextBuybackAmountQuery);
+  const { data: buybackDeposit, isError: isErrorBuybackDeposit } = useQuery(
+    buybackDepositAmountQuery,
+  );
+  const { data: price, isError: isErrorPrice } = useQuery(
+    dydxCurrentPriceQuery,
+  );
+
+  const isError = isErrorBuybackDeposit || isErrorPrice;
+
+  const data = useMemo(() => {
+    if (isError || !price || !buybackDeposit) return "N/A";
+
+    return formatCompactNumber(buybackDeposit / price);
+  }, [buybackDeposit, price, isError]);
 
   return (
     <GenericCard
