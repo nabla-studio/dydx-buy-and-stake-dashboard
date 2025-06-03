@@ -322,6 +322,10 @@ export const stakingWalletAddress =
   "dydx1vx93pwuxf7j5c90tukj084ka26fclcjuqdmw2a";
 export const buyBackWalletAddress =
   "dydx1zc0jd76vfluauk6pc6rsq5dkwyjz9h8uqgppj6";
+export const binanceBuyBackWalletAddress =
+  "dydx13jlwpcf90m3funcdz736w0ujh49d66s884aaa4";
+export const opsSubDAOWalletAddress =
+  "dydx126h08stz9xpln0pesthql4g8clq42kc8au7uys";
 
 export const stakingWalletHistoryQuery = historyQuery(stakingWalletAddress);
 export const buyBackWalletHistoryQuery = historyQuery(buyBackWalletAddress);
