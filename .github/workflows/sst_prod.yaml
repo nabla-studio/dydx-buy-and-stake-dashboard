@@ -57,6 +57,7 @@ jobs:
           DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
           DOMAIN_CERT_ARN: ${{ secrets.DOMAIN_CERT_ARN }}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL}}
-
+          DO_NOT_TRACK: 1
+          
         run: |
           bunx sst deploy --stage=prod
