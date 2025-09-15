@@ -26,9 +26,9 @@ export const TransactionsTable = () => {
 
   const data = useMemo(
     () =>
-      [...(stakingWalletTxs ?? []), ...(buyBackWalletTxs ?? [])].sort((a, b) =>
-        compareDesc(a.datetime, b.datetime),
-      ),
+      [...(stakingWalletTxs ?? []), ...(buyBackWalletTxs ?? [])]
+        .filter((tx) => tx.code === 0)
+        .sort((a, b) => compareDesc(a.datetime, b.datetime)),
     [buyBackWalletTxs, stakingWalletTxs],
   );
 

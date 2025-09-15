@@ -201,6 +201,7 @@ export const totalWalletsQuery = queryOptions({
 });
 
 export type Transaction = {
+  code: number;
   txHash: string;
   datetime: string;
   amount: string;
@@ -304,6 +305,7 @@ export const historyQuery = (address: string) =>
           BigInt(txAmount.amount) / BigInt(10 ** unitDenom.exponent);
 
         txs.push({
+          code: rawTx.code,
           txHash: rawTx.hash,
           datetime: rawTx.blockTimestamp,
           sender: fromAddress,
