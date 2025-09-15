@@ -58,7 +58,8 @@ jobs:
         env:
           DEV_DOMAIN_NAME: ${{ secrets.DEV_DOMAIN_NAME}}
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL}}
-
+          DO_NOT_TRACK: 1
+          
         run: bun sst deploy --stage=pr-${{ github.event.number }}
     
       # 7. Remove deploy: when PR is closed (or merged).
