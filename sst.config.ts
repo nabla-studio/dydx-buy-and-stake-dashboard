@@ -3,10 +3,9 @@
 
 // Extract environment variables
 const { DOMAIN_NAME, DOMAIN_CERT_ARN } = process.env;
-const { DEV_DOMAIN_NAME } = process.env;
 
 const getDashboardUrl = () => {
-  const domain = DOMAIN_NAME || DEV_DOMAIN_NAME;
+  const domain = DOMAIN_NAME;
   return domain ? `https://${domain}/` : "";
 };
 
